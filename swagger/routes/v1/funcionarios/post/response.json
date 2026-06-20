@@ -1,0 +1,16 @@
+{
+    "201": {
+        "description": "Funcionário criado",
+        "schema": { "type": "object" }
+    },
+    "403": {
+        "description": "Sem permissão (precisa ser admin)",
+        "schema": {
+            "type": "object",
+            "properties": {
+                "errorID": { "type": "string" },
+                "msg": { "type": "string" }
+            }
+        }
+    }
+}

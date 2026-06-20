@@ -1,0 +1,25 @@
+{
+	"compilerOptions": {
+		"target": "ESNext",
+		"module": "CommonJS",
+		"lib": ["esnext"],
+		"declaration": false,
+		"allowJs": true,
+		"outDir": "./__BUILD__",
+		"esModuleInterop": true,
+		"resolveJsonModule": true,
+		"strictNullChecks": true,
+		"sourceMap": true,
+		"types": [ "pwi-plata-type", "node" ],
+        "noEmit": true,
+        "skipLibCheck": true,
+		"forceConsistentCasingInFileNames": true,
+		"baseUrl": ".",
+		"paths": {
+			"@@/*": [ "./*" ]
+		}
+    },
+	"include": [
+		"./**/*"
+	]
+}

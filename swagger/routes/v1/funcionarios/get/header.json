@@ -1,0 +1,7 @@
+{
+    "summary": "Listar funcionários",
+    "description": "Lista os funcionários da clínica. Acesso: admin e recepção.",
+    "tags": ["Funcionários"],
+    "security": [{ "apiKeyAuth": [] }],
+    "parameters": []
+}

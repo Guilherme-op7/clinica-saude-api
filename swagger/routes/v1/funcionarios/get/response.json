@@ -1,0 +1,19 @@
+{
+    "200": {
+        "description": "Lista de funcionários",
+        "schema": {
+            "type": "array",
+            "items": { "type": "object" }
+        }
+    },
+    "403": {
+        "description": "Sem permissão (precisa ser admin ou recepção)",
+        "schema": {
+            "type": "object",
+            "properties": {
+                "errorID": { "type": "string" },
+                "msg": { "type": "string" }
+            }
+        }
+    }
+}

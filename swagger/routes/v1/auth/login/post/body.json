@@ -1,0 +1,14 @@
+{
+    "description": "Credenciais de login",
+    "type": "object",
+    "example": {
+        "email": {
+            "type": "string",
+            "example": "admin@clinica.com"
+        },
+        "senha": {
+            "type": "string",
+            "example": "minhaSenha123"
+        }
+    }
+}

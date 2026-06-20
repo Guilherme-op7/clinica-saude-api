@@ -1,0 +1,7 @@
+{
+    "summary": "Cadastrar funcionário",
+    "description": "Cria um novo funcionário. Acesso: somente admin.",
+    "tags": ["Funcionários"],
+    "security": [{ "apiKeyAuth": [] }],
+    "parameters": []
+}

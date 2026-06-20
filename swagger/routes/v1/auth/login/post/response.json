@@ -1,0 +1,34 @@
+{
+    "200": {
+        "description": "Login realizado com sucesso",
+        "schema": {
+            "type": "object",
+            "properties": {
+                "token": { "type": "string" },
+                "nome": { "type": "string" },
+                "tipoUsuario": { "type": "string", "example": "admin" }
+            }
+        }
+    },
+    "400": {
+        "description": "Erro de validação dos dados de login",
+        "schema": {
+            "type": "object",
+            "properties": {
+                "errorID": { "type": "string", "example": "BR1AULO001" },
+                "msg": { "type": "string" },
+                "error": { "type": "object" }
+            }
+        }
+    },
+    "401": {
+        "description": "Login ou senha incorretos",
+        "schema": {
+            "type": "object",
+            "properties": {
+                "errorID": { "type": "string", "example": "BLSQLUSRLOGIN001" },
+                "msg": { "type": "string", "example": "Login ou senha incorretos" }
+            }
+        }
+    }
+}

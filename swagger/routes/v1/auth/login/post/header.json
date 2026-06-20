@@ -1,0 +1,7 @@
+{
+    "summary": "Login",
+    "description": "Autentica um usuário (admin, recepção, médico ou paciente) e devolve um token JWT.",
+    "tags": ["Autenticação"],
+    "security": [],
+    "parameters": []
+}

@@ -1,0 +1,13 @@
+{
+    "description": "Dados de cadastro do paciente",
+    "type": "object",
+    "example": {
+        "nome": { "type": "string", "example": "Maria Silva" },
+        "email": { "type": "string", "example": "maria@email.com" },
+        "senha": { "type": "string", "example": "minhaSenha123" },
+        "cpf": { "type": "string", "example": "12345678900" },
+        "cartaoSus": { "type": "string", "example": "" },
+        "dataNascimento": { "type": "string", "example": "1990-05-10" },
+        "telefone": { "type": "string", "example": "11999998888" }
+    }
+}

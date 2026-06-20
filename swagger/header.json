@@ -1,0 +1,21 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "TCC Frei - API Saúde",
+        "description": "API da clínica (saudedb) - evolução do TCC no padrão PWI",
+        "version": "1.0.0"
+    },
+    "host": "localhost:3050",
+    "basePath": "/api",
+    "schemes": [
+        "http"
+    ],
+    "tags": [],
+    "securityDefinitions": {
+        "apiKeyAuth": {
+            "type": "apiKey",
+            "name": "x-access-token",
+            "in": "header"
+        }
+    }
+}

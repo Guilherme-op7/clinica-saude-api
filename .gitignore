@@ -1,0 +1,30 @@
+# Build
+__BUILD__
+__RELEASE__
+
+# Dependências
+node_modules/
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Envs 
+envs/*.env
+!envs/*.env.example
+
+# TypeScript
+*.tsbuildinfo
+
+# Diversos
+.npm
+.eslintcache
+*.tgz
+.cache
+
+# Editor (mantém .vscode/settings.json e extensions.json, ignora estado pessoal)
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+!.vscode/launch.json

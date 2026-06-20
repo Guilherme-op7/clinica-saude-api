@@ -1,0 +1,9 @@
+{
+    "description": "Dados do funcionário",
+    "type": "object",
+    "example": {
+        "dsNome": { "type": "string", "example": "João Souza" },
+        "nrCpf": { "type": "string", "example": "12345678900" },
+        "dsCargo": { "type": "string", "example": "Recepcionista" }
+    }
+}

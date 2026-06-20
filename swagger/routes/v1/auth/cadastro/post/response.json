@@ -1,0 +1,21 @@
+{
+    "201": {
+        "description": "Conta criada com sucesso",
+        "schema": {
+            "type": "object",
+            "properties": {
+                "token": { "type": "string" }
+            }
+        }
+    },
+    "400": {
+        "description": "Erro de validação ou e-mail já cadastrado",
+        "schema": {
+            "type": "object",
+            "properties": {
+                "errorID": { "type": "string" },
+                "msg": { "type": "string" }
+            }
+        }
+    }
+}

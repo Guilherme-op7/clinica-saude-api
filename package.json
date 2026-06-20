@@ -1,0 +1,28 @@
+{
+    "name": "backend-tcc",
+    "version": "1.0.0",
+    "description": "",
+    "scripts": {
+        "start": "plata-runtime + plata-api",
+        "dev": "plata-runtime + plata-api --hot",
+        "create": "plata-runtime --skip-recompile + plata-create",
+        "build": "tsc -p . && plata-runtime + plata-build",
+        "gen:swagger": "plata-runtime + plata-swagger"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "type": "commonjs",
+    "plata_type": "api",
+    "plata_name": "pwi-plata-type",
+    "my-scripts": {},
+    "dependencies": {
+        "cors": "^2.8.5",
+        "pwi-plata-jwt": "^0.1.8",
+        "pwi-plata-mssql": "^0.4.24",
+        "pwi-plata-type": "^0.4.218"
+    },
+    "devDependencies": {
+        "@types/cors": "^2.8.19"
+    }
+}

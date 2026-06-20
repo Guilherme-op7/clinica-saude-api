@@ -1,0 +1,7 @@
+{
+    "summary": "Cadastro de paciente",
+    "description": "Self-registration: paciente cria a própria conta (cria tb_pacientes + tb_usuarios numa transação) e já recebe um token JWT.",
+    "tags": ["Autenticação"],
+    "security": [],
+    "parameters": []
+}
