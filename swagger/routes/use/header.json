@@ -1,0 +1,19 @@
+{
+    "summary": "summary",
+    "description": "Descrião da rota",
+    "tags": [],
+    "security": [
+        {
+            "apiKeyAuth": []
+        }
+    ],
+    "parameters": [
+        {
+            "name": "test",
+            "description": "",
+            "in": "header",
+            "required": false,
+            "type": "string"
+        }
+    ]
+}

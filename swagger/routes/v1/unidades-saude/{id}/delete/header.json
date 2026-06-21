@@ -1,0 +1,15 @@
+{
+    "summary": "Remover unidade de saúde",
+    "description": "Remove uma unidade de saúde. Acesso: somente admin.",
+    "tags": ["Unidades de Saúde"],
+    "security": [{ "apiKeyAuth": [] }],
+    "parameters": [
+        {
+            "name": "id",
+            "description": "Id da unidade de saúde",
+            "in": "path",
+            "required": true,
+            "type": "integer"
+        }
+    ]
+}

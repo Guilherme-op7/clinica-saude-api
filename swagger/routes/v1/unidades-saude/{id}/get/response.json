@@ -1,0 +1,24 @@
+{
+    "200": {
+        "description": "Unidade de saúde encontrada",
+        "schema": {
+            "type": "object",
+            "properties": {
+                "PK_ID": { "type": "integer" },
+                "DS_UNIDADE": { "type": "string" },
+                "DS_ENDERECO": { "type": "string" },
+                "DS_TELEFONE": { "type": "string" }
+            }
+        }
+    },
+    "500": {
+        "description": "Unidade de saúde não encontrada",
+        "schema": {
+            "type": "object",
+            "properties": {
+                "errorID": { "type": "string" },
+                "msg": { "type": "string" }
+            }
+        }
+    }
+}

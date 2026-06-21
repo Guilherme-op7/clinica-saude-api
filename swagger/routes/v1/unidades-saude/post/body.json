@@ -1,0 +1,9 @@
+{
+    "description": "Dados da unidade de saúde",
+    "type": "object",
+    "example": {
+        "DS_UNIDADE": { "type": "string", "example": "UBS Centro" },
+        "DS_ENDERECO": { "type": "string", "example": "Rua Principal, 100" },
+        "DS_TELEFONE": { "type": "string", "example": "1133334444" }
+    }
+}

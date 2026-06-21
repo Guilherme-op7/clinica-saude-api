@@ -1,0 +1,17 @@
+{
+    "200": {
+        "description": "Lista de unidades de saúde",
+        "schema": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "PK_ID": { "type": "integer" },
+                    "DS_UNIDADE": { "type": "string" },
+                    "DS_ENDERECO": { "type": "string" },
+                    "DS_TELEFONE": { "type": "string" }
+                }
+            }
+        }
+    }
+}

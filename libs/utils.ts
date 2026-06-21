@@ -24,8 +24,6 @@ export namespace Utils {
         }
     }
 
-    // Para rotas acessadas por mais de um papel (ex.: admin + recepcao).
-    // Devolve o primeiro tipo da lista que bater com o token do usuário.
     export function getUsuarioOneOf<K extends TApi.Token['type']>(infoUser: TApi.InfoUsuario, esperados: K[]): PlataResult<Usuario<K>> {
         if (!esperados.includes(infoUser.token.type as K)) {
             return {

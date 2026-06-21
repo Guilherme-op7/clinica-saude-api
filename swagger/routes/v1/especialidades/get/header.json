@@ -1,0 +1,7 @@
+{
+    "summary": "Listar especialidades",
+    "description": "Lista todas as especialidades cadastradas.",
+    "tags": ["Especialidades"],
+    "security": [{ "apiKeyAuth": [] }],
+    "parameters": []
+}

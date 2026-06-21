@@ -1,0 +1,17 @@
+{
+    "200": {
+        "description": "Lista de especialidades",
+        "schema": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "PK_ID": { "type": "integer" },
+                    "DS_ESPECIALIDADE": { "type": "string" },
+                    "VL_CONSULTA": { "type": "integer" },
+                    "DS_COR": { "type": "string" }
+                }
+            }
+        }
+    }
+}

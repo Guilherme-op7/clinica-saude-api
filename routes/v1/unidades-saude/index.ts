@@ -1,29 +1,31 @@
-import { tbespecialidades } from '@@/libs/sql/tbespecialidades'
-import { Utils } from "@@/libs/utils"
-import { cadastrarEspecialidadeModel } from "@@/models/api/cadastrar-especialidade"
+import { tbunidadessaude } from '@@/libs/sql/tbunidadessaude'
+import { Utils } from '@@/libs/utils'
+import { cadastrarunidadessaudeModel } from '@@/models/api/cadastrar-unidades-saude'
 
 export default async (router: Router.Router): Promise<Router.Router> => {
+
     router.get('/', async (req, res) => {
         const sql = req.extras
 
-        const lista = await tbespecialidades.get(s => s, sql)
+        const consulta = await tbunidadessaude.get(s => s, sql)
 
-        if (lista.errorID !== undefined) {
-            return res.status(500).error(lista)
+        if (consulta.errorID !== undefined) {
+            return res.status(500).error(consulta)
         }
-        return res.status(200).json(lista)
+
+        return res.status(200).json(consulta)
     })
 
     router.get('/:id', async (req, res) => {
         const sql = req.extras
 
-        const especialidade = await tbespecialidades.ListarEspecialidadesId(+req.params.id, sql)
+        const unidades = await tbunidadessaude.getById(+req.params.id, sql)
 
-        if (especialidade.errorID !== undefined) {
-            return res.status(404).error(especialidade)
+        if (unidades.errorID !== undefined) {
+            return res.status(500).error(unidades)
         }
 
-        return res.status(200).json(especialidade)
+        return res.status(200).json(unidades)
     })
 
     router.post('/', async (req, res) => {
@@ -33,21 +35,21 @@ export default async (router: Router.Router): Promise<Router.Router> => {
             return res.status(403).error(usuario)
         }
 
-        const validado = await cadastrarEspecialidadeModel.validate(req.body)
+        const validado = await cadastrarunidadessaudeModel.validate(req.body)
 
         if (validado.errors !== undefined) {
             return res.status(400).error({
-                errorID: 'BR1ESPCAD001',
-                msg: 'Erro ao validar os dados da especialidade',
+                errorID: 'BR1ESPCAD002',
+                msg: 'Erro ao validar os dados da unidade de saude',
                 error: validado.errors
             })
         }
 
-        const criada = await tbespecialidades.CriarEspecialidades({
-            PK_ID: 0, // so p satisfazer o tipo
-            DS_ESPECIALIDADE: validado.value.DS_ESPECIALIDADE,
-            VL_CONSULTA: validado.value.VL_CONSULTA,
-            DS_COR: validado.value.DS_COR,
+        const criada = await tbunidadessaude.CriarUnidadeSaude({
+            PK_ID: 0,
+            DS_ENDERECO: validado.value.DS_ENDERECO,
+            DS_TELEFONE: validado.value.DS_TELEFONE,
+            DS_UNIDADE: validado.value.DS_UNIDADE
         }, usuario.mssql)
 
         if (criada.errorID !== undefined) {
@@ -57,28 +59,28 @@ export default async (router: Router.Router): Promise<Router.Router> => {
         return res.status(201).json(criada)
     })
 
-    router.put('/:id', async (req, res) => {
+    router.put("/:id", async (req, res) => {
         const usuario = Utils.getUsuario(req.user, "ADMIN")
 
         if (usuario.errorID !== undefined) {
             return res.status(403).error(usuario)
         }
 
-        const validado = await cadastrarEspecialidadeModel.validate(req.body)
+        const validado = await cadastrarunidadessaudeModel.validate(req.body)
 
         if (validado.errors !== undefined) {
             return res.status(400).error({
-                errorID: 'BR1ESPUPD001',
-                msg: 'Erro ao validar os dados da especialidade',
+                errorID: 'BR1ESPCAD003',
+                msg: 'Erro ao validar os dados da unidade de saude',
                 error: validado.errors
             })
         }
 
-        const atualizada = await tbespecialidades.AtualizarEspecialidades({
+        const atualizada = await tbunidadessaude.AtualizarUnidadeSaude({
             PK_ID: +req.params.id,
-            DS_ESPECIALIDADE: validado.value.DS_ESPECIALIDADE,
-            VL_CONSULTA: validado.value.VL_CONSULTA,
-            DS_COR: validado.value.DS_COR,
+            DS_ENDERECO: validado.value.DS_ENDERECO,
+            DS_TELEFONE: validado.value.DS_TELEFONE,
+            DS_UNIDADE: validado.value.DS_UNIDADE
         }, usuario.mssql)
 
         if (atualizada.errorID !== undefined) {
@@ -95,7 +97,7 @@ export default async (router: Router.Router): Promise<Router.Router> => {
             return res.status(403).error(usuario)
         }
 
-        const removida = await tbespecialidades.RemoverEspecialidades(+req.params.id, usuario.mssql)
+        const removida = await tbunidadessaude.RemoverUnidadeSaude(+req.params.id, usuario.mssql)
 
         if (removida.errorID !== undefined) {
             return res.status(500).error(removida)
@@ -103,6 +105,7 @@ export default async (router: Router.Router): Promise<Router.Router> => {
 
         return res.status(200).json({})
     })
+
 
     return router
 }

@@ -1,7 +1,6 @@
 import { getJWT } from '@@/libs/jwt'
 import { getMssql } from '@@/libs/mssql'
 
-// Single-tenant: toda request usa a mesma conexão MSSQL (getMssql()), sem lookup de cliente.
 export default async function (router: Router.Router): Promise<Router.Router> {
     const jwt = getJWT<TApi.Token>()
 
@@ -9,7 +8,6 @@ export default async function (router: Router.Router): Promise<Router.Router> {
         const sql = getMssql()
         req.extras = sql
 
-        // login/cadastro não exigem token
         if (/^\/auth\/?.*/.test(req.path)) {
             return next()
         }

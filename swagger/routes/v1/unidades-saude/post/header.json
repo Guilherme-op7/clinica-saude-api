@@ -1,0 +1,7 @@
+{
+    "summary": "Cadastrar unidade de saúde",
+    "description": "Cria uma nova unidade de saúde. Acesso: somente admin.",
+    "tags": ["Unidades de Saúde"],
+    "security": [{ "apiKeyAuth": [] }],
+    "parameters": []
+}

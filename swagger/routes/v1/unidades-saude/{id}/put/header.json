@@ -1,0 +1,15 @@
+{
+    "summary": "Atualizar unidade de saúde",
+    "description": "Atualiza uma unidade de saúde existente. Acesso: somente admin.",
+    "tags": ["Unidades de Saúde"],
+    "security": [{ "apiKeyAuth": [] }],
+    "parameters": [
+        {
+            "name": "id",
+            "description": "Id da unidade de saúde",
+            "in": "path",
+            "required": true,
+            "type": "integer"
+        }
+    ]
+}

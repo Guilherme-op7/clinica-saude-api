@@ -1,0 +1,15 @@
+{
+    "summary": "Buscar especialidade",
+    "description": "Busca uma especialidade pelo id.",
+    "tags": ["Especialidades"],
+    "security": [{ "apiKeyAuth": [] }],
+    "parameters": [
+        {
+            "name": "id",
+            "description": "Id da especialidade",
+            "in": "path",
+            "required": true,
+            "type": "integer"
+        }
+    ]
+}

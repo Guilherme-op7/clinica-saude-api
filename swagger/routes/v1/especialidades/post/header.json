@@ -1,0 +1,7 @@
+{
+    "summary": "Cadastrar especialidade",
+    "description": "Cria uma nova especialidade. Acesso: somente admin.",
+    "tags": ["Especialidades"],
+    "security": [{ "apiKeyAuth": [] }],
+    "parameters": []
+}

@@ -1,0 +1,24 @@
+{
+    "200": {
+        "description": "Especialidade encontrada",
+        "schema": {
+            "type": "object",
+            "properties": {
+                "PK_ID": { "type": "integer" },
+                "DS_ESPECIALIDADE": { "type": "string" },
+                "VL_CONSULTA": { "type": "integer" },
+                "DS_COR": { "type": "string" }
+            }
+        }
+    },
+    "404": {
+        "description": "Especialidade não encontrada",
+        "schema": {
+            "type": "object",
+            "properties": {
+                "errorID": { "type": "string" },
+                "msg": { "type": "string" }
+            }
+        }
+    }
+}

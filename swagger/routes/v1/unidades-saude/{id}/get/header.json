@@ -1,0 +1,15 @@
+{
+    "summary": "Buscar unidade de saúde",
+    "description": "Busca uma unidade de saúde pelo id.",
+    "tags": ["Unidades de Saúde"],
+    "security": [{ "apiKeyAuth": [] }],
+    "parameters": [
+        {
+            "name": "id",
+            "description": "Id da unidade de saúde",
+            "in": "path",
+            "required": true,
+            "type": "integer"
+        }
+    ]
+}

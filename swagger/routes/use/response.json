@@ -1,0 +1,52 @@
+{
+    "200": {
+        "description": "Okay",
+        "schema": {
+            "type": "object",
+            "properties": {}
+        }
+    },
+    "400": {
+        "description": "Requisição inválida",
+        "schema": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "errorID": {
+                        "type": "string",
+                        "example": "EBR1D002"
+                    },
+                    "msg": {
+                        "type": "string",
+                        "example": "Mensagem de erro"
+                    },
+                    "error": {
+                        "type": "any",
+                        "example": {}
+                    }
+                }
+            }
+        }
+    },
+    "500": {
+        "description": "Erro interno",
+        "schema": {
+            "type": "object",
+            "properties": {
+                "errorID": {
+                    "type": "string",
+                    "example": "EBR1D003"
+                },
+                "msg": {
+                    "type": "string",
+                    "example": "Mensagem de erro"
+                },
+                "error": {
+                    "type": "any",
+                    "example": {}
+                }
+            }
+        }
+    }
+}

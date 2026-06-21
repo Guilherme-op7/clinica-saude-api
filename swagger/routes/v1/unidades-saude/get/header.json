@@ -1,0 +1,7 @@
+{
+    "summary": "Listar unidades de saúde",
+    "description": "Lista todas as unidades de saúde da clínica.",
+    "tags": ["Unidades de Saúde"],
+    "security": [{ "apiKeyAuth": [] }],
+    "parameters": []
+}

@@ -1,0 +1,32 @@
+{
+    "201": {
+        "description": "Especialidade criada",
+        "schema": {
+            "type": "object",
+            "properties": {
+                "pkid": { "type": "integer" }
+            }
+        }
+    },
+    "400": {
+        "description": "Erro de validação",
+        "schema": {
+            "type": "object",
+            "properties": {
+                "errorID": { "type": "string" },
+                "msg": { "type": "string" },
+                "error": { "type": "object" }
+            }
+        }
+    },
+    "403": {
+        "description": "Sem permissão (precisa ser admin)",
+        "schema": {
+            "type": "object",
+            "properties": {
+                "errorID": { "type": "string" },
+                "msg": { "type": "string" }
+            }
+        }
+    }
+}

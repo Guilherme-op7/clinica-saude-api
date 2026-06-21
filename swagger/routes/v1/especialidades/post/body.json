@@ -1,0 +1,9 @@
+{
+    "description": "Dados da especialidade",
+    "type": "object",
+    "example": {
+        "DS_ESPECIALIDADE": { "type": "string", "example": "Cardiologia" },
+        "VL_CONSULTA": { "type": "integer", "example": 250 },
+        "DS_COR": { "type": "string", "example": "#FF0000" }
+    }
+}

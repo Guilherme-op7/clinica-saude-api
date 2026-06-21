@@ -1,0 +1,15 @@
+{
+    "summary": "Remover especialidade",
+    "description": "Remove uma especialidade. Acesso: somente admin.",
+    "tags": ["Especialidades"],
+    "security": [{ "apiKeyAuth": [] }],
+    "parameters": [
+        {
+            "name": "id",
+            "description": "Id da especialidade",
+            "in": "path",
+            "required": true,
+            "type": "integer"
+        }
+    ]
+}

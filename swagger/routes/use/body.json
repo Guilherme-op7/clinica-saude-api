@@ -1,0 +1,15 @@
+{
+    "description": "",
+    "type": "object",
+    "example": {
+        "test": {
+            "type": "number",
+            "example": 123
+        }
+    },
+    "extras": {
+        "xml": {
+            "name": "root"
+        }
+    }
+}

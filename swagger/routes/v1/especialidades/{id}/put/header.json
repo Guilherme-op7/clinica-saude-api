@@ -1,0 +1,15 @@
+{
+    "summary": "Atualizar especialidade",
+    "description": "Atualiza uma especialidade existente. Acesso: somente admin.",
+    "tags": ["Especialidades"],
+    "security": [{ "apiKeyAuth": [] }],
+    "parameters": [
+        {
+            "name": "id",
+            "description": "Id da especialidade",
+            "in": "path",
+            "required": true,
+            "type": "integer"
+        }
+    ]
+}
