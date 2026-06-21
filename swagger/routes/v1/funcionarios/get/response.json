@@ -3,7 +3,22 @@
         "description": "Lista de funcionários",
         "schema": {
             "type": "array",
-            "items": { "type": "object" }
+            "items": {
+                "type": "object",
+                "properties": {
+                    "PK_ID": { "type": "integer" },
+                    "DS_NOME": { "type": "string" },
+                    "NR_CPF": { "type": "string" },
+                    "DS_DEPARTAMENTO": { "type": "string" },
+                    "DS_CARGO": { "type": "string" },
+                    "VL_SALARIO": { "type": "number" },
+                    "DS_EMAIL": { "type": "string" },
+                    "DS_TELEFONE": { "type": "string" },
+                    "FL_ATIVO": { "type": "boolean" },
+                    "DT_ADMISSAO": { "type": "string", "format": "date-time" },
+                    "DT_DEMISSAO": { "type": "string", "format": "date-time" }
+                }
+            }
         }
     },
     "403": {

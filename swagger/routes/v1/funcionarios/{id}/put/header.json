@@ -1,0 +1,15 @@
+{
+    "summary": "Atualizar funcionário",
+    "description": "Atualiza um funcionário existente. Acesso: somente admin.",
+    "tags": ["Funcionários"],
+    "security": [{ "apiKeyAuth": [] }],
+    "parameters": [
+        {
+            "name": "id",
+            "description": "Id do funcionário",
+            "in": "path",
+            "required": true,
+            "type": "integer"
+        }
+    ]
+}

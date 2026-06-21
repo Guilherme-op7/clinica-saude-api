@@ -1,15 +1,10 @@
 {
-    "201": {
-        "description": "Funcionário criado",
-        "schema": {
-            "type": "object",
-            "properties": {
-                "idfuncionario": { "type": "integer" }
-            }
-        }
+    "200": {
+        "description": "Funcionário atualizado",
+        "schema": { "type": "object" }
     },
     "400": {
-        "description": "Erro de validação ou e-mail/CPF já cadastrado",
+        "description": "Erro de validação",
         "schema": {
             "type": "object",
             "properties": {

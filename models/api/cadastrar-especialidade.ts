@@ -3,7 +3,7 @@ import { Tools } from '@@/libs/tools'
 
 const cadastrarEspecialidade = new PlataModels.ModelTemplate({
     DS_ESPECIALIDADE:   [PlataModels.Required(), PlataModels.VarChar(100)],
-    VL_CONSULTA:        [PlataModels.Required(), PlataModels.Int()],
+    VL_CONSULTA:        [PlataModels.Required(), PlataModels.Decimal()],
     DS_COR:             [PlataModels.Optional(), PlataModels.VarChar(20)],
 } as const, {})
 

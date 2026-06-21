@@ -3,7 +3,7 @@ import { PlataModels } from 'pwi-plata-type'
 const tbespecialidades = new PlataModels.ModelTemplate({
     PK_ID:              [PlataModels.Required(), PlataModels.Int()],
     DS_ESPECIALIDADE:   [PlataModels.Required(), PlataModels.VarChar()],
-    VL_CONSULTA:        [PlataModels.Required(), PlataModels.Int()],
+    VL_CONSULTA:        [PlataModels.Required(), PlataModels.Decimal()],
     DS_COR:             [PlataModels.Optional(), PlataModels.VarChar()]
 } as const, {})
 

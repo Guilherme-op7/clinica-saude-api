@@ -1,7 +1,29 @@
 {
     "summary": "Listar funcionários",
-    "description": "Lista os funcionários da clínica. Acesso: admin e recepção.",
+    "description": "Lista os funcionários da clínica, com filtros opcionais por departamento, cargo e status. Acesso: admin e recepção.",
     "tags": ["Funcionários"],
     "security": [{ "apiKeyAuth": [] }],
-    "parameters": []
+    "parameters": [
+        {
+            "name": "departamento",
+            "description": "Filtra pelo departamento exato",
+            "in": "query",
+            "required": false,
+            "type": "string"
+        },
+        {
+            "name": "cargo",
+            "description": "Filtra pelo cargo exato",
+            "in": "query",
+            "required": false,
+            "type": "string"
+        },
+        {
+            "name": "ativo",
+            "description": "Filtra por status (\"true\" ou \"false\")",
+            "in": "query",
+            "required": false,
+            "type": "string"
+        }
+    ]
 }

@@ -6,7 +6,7 @@
             "properties": {
                 "PK_ID": { "type": "integer" },
                 "DS_ESPECIALIDADE": { "type": "string" },
-                "VL_CONSULTA": { "type": "integer" },
+                "VL_CONSULTA": { "type": "double" },
                 "DS_COR": { "type": "string" }
             }
         }

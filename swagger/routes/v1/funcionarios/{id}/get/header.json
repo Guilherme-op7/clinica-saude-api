@@ -1,0 +1,15 @@
+{
+    "summary": "Buscar funcionário",
+    "description": "Busca um funcionário pelo id. Acesso: admin e recepção.",
+    "tags": ["Funcionários"],
+    "security": [{ "apiKeyAuth": [] }],
+    "parameters": [
+        {
+            "name": "id",
+            "description": "Id do funcionário",
+            "in": "path",
+            "required": true,
+            "type": "integer"
+        }
+    ]
+}

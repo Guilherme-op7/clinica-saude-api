@@ -1,0 +1,15 @@
+{
+    "summary": "Desativar funcionário",
+    "description": "Soft delete: marca o funcionário como inativo e grava a data de demissão (não exclui a linha). Acesso: somente admin.",
+    "tags": ["Funcionários"],
+    "security": [{ "apiKeyAuth": [] }],
+    "parameters": [
+        {
+            "name": "id",
+            "description": "Id do funcionário",
+            "in": "path",
+            "required": true,
+            "type": "integer"
+        }
+    ]
+}
