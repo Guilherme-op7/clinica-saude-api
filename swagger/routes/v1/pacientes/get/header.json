@@ -1,0 +1,28 @@
+{
+    "summary": "Listar pacientes",
+    "description": "Lista pacientes com filtros opcionais. Acesso: admin, recepção e médico (o paciente só consulta o próprio cadastro).",
+    "tags": [
+        "Pacientes"
+    ],
+    "security": [
+        {
+            "apiKeyAuth": []
+        }
+    ],
+    "parameters": [
+        {
+            "name": "nome",
+            "description": "Filtra pacientes cujo nome contém o texto",
+            "in": "query",
+            "required": false,
+            "type": "string"
+        },
+        {
+            "name": "status",
+            "description": "Filtra por status (\"ativo\" ou \"inativo\")",
+            "in": "query",
+            "required": false,
+            "type": "string"
+        }
+    ]
+}

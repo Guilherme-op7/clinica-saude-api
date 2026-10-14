@@ -1,0 +1,21 @@
+{
+    "summary": "Desativar medicação",
+    "description": "Soft delete via procedure: marca a medicação como inativa (não exclui a linha). Acesso: somente admin.",
+    "tags": [
+        "Medicações"
+    ],
+    "security": [
+        {
+            "apiKeyAuth": []
+        }
+    ],
+    "parameters": [
+        {
+            "name": "id",
+            "description": "Id da medicação",
+            "in": "path",
+            "required": true,
+            "type": "integer"
+        }
+    ]
+}

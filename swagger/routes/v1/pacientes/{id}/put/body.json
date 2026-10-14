@@ -1,0 +1,50 @@
+{
+    "description": "Dados do paciente",
+    "type": "object",
+    "example": {
+        "DS_NOME": {
+            "type": "string",
+            "example": "Maria da Silva"
+        },
+        "NR_CPF": {
+            "type": "string",
+            "example": "12345678900"
+        },
+        "NR_CARTAO_SUS": {
+            "type": "string",
+            "example": "898000000000000"
+        },
+        "DT_NASCIMENTO": {
+            "type": "string",
+            "example": "1990-05-20"
+        },
+        "TP_SEXO": {
+            "type": "string",
+            "example": "F"
+        },
+        "DS_TELEFONE": {
+            "type": "string",
+            "example": "11999998888"
+        },
+        "DS_EMAIL": {
+            "type": "string",
+            "example": "maria@email.com"
+        },
+        "DS_ENDERECO": {
+            "type": "string",
+            "example": "Rua das Flores, 100"
+        },
+        "DS_TIPO_SANGUINEO": {
+            "type": "string",
+            "example": "O+"
+        },
+        "DS_ALERGIAS": {
+            "type": "string",
+            "example": "Penicilina"
+        },
+        "DS_CONTATO_EMERGENCIA": {
+            "type": "string",
+            "example": "João - 11988887777"
+        }
+    }
+}

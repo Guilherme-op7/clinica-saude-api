@@ -1,0 +1,21 @@
+{
+    "summary": "Atualizar médico",
+    "description": "Atualiza um médico existente (via procedure). Acesso: somente admin.",
+    "tags": [
+        "Médicos"
+    ],
+    "security": [
+        {
+            "apiKeyAuth": []
+        }
+    ],
+    "parameters": [
+        {
+            "name": "id",
+            "description": "Id do médico",
+            "in": "path",
+            "required": true,
+            "type": "integer"
+        }
+    ]
+}

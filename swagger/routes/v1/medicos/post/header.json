@@ -1,0 +1,13 @@
+{
+    "summary": "Cadastrar médico",
+    "description": "Cria um novo médico (via procedure). Acesso: somente admin.",
+    "tags": [
+        "Médicos"
+    ],
+    "security": [
+        {
+            "apiKeyAuth": []
+        }
+    ],
+    "parameters": []
+}

@@ -1,0 +1,36 @@
+{
+    "200": {
+        "description": "Paciente desativado",
+        "schema": {
+            "type": "object"
+        }
+    },
+    "403": {
+        "description": "Sem permissão (precisa ser admin)",
+        "schema": {
+            "type": "object",
+            "properties": {
+                "errorID": {
+                    "type": "string"
+                },
+                "msg": {
+                    "type": "string"
+                }
+            }
+        }
+    },
+    "404": {
+        "description": "Paciente não encontrado",
+        "schema": {
+            "type": "object",
+            "properties": {
+                "errorID": {
+                    "type": "string"
+                },
+                "msg": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,53 @@
+{
+    "200": {
+        "description": "Médico atualizado",
+        "schema": {
+            "type": "object"
+        }
+    },
+    "400": {
+        "description": "Erro de validação, funcionário/especialidade inexistente ou CRM já cadastrado",
+        "schema": {
+            "type": "object",
+            "properties": {
+                "errorID": {
+                    "type": "string"
+                },
+                "msg": {
+                    "type": "string"
+                },
+                "error": {
+                    "type": "object"
+                }
+            }
+        }
+    },
+    "403": {
+        "description": "Sem permissão",
+        "schema": {
+            "type": "object",
+            "properties": {
+                "errorID": {
+                    "type": "string"
+                },
+                "msg": {
+                    "type": "string"
+                }
+            }
+        }
+    },
+    "404": {
+        "description": "Médico não encontrado",
+        "schema": {
+            "type": "object",
+            "properties": {
+                "errorID": {
+                    "type": "string"
+                },
+                "msg": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

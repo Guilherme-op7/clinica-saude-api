@@ -1,0 +1,35 @@
+{
+    "summary": "Listar medicacoes",
+    "description": "Lista medicacoes com filtros opcionais. Acesso: admin, recepção e médico.",
+    "tags": [
+        "Medicações"
+    ],
+    "security": [
+        {
+            "apiKeyAuth": []
+        }
+    ],
+    "parameters": [
+        {
+            "name": "nome",
+            "description": "Filtra medicações cujo nome contém o texto",
+            "in": "query",
+            "required": false,
+            "type": "string"
+        },
+        {
+            "name": "controlada",
+            "description": "Filtra por medicação controlada (\"true\" ou \"false\")",
+            "in": "query",
+            "required": false,
+            "type": "string"
+        },
+        {
+            "name": "ativo",
+            "description": "Filtra por status (\"true\" ou \"false\")",
+            "in": "query",
+            "required": false,
+            "type": "string"
+        }
+    ]
+}

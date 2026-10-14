@@ -1,0 +1,22 @@
+{
+    "description": "Dados do médico",
+    "type": "object",
+    "example": {
+        "FK_FUNCIONARIO": {
+            "type": "integer",
+            "example": 1
+        },
+        "FK_ESPECIALIDADE": {
+            "type": "integer",
+            "example": 1
+        },
+        "NR_CRM": {
+            "type": "string",
+            "example": "123456"
+        },
+        "DS_UF_CRM": {
+            "type": "string",
+            "example": "SP"
+        }
+    }
+}

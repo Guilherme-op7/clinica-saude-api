@@ -1,0 +1,79 @@
+-- A ordem dos parâmetros importa: a API chama as procedures de forma posicional (EXEC proc ?, ?, ...).
+
+CREATE OR ALTER PROCEDURE dbo.SP_MEDICOS_CADASTRAR
+    @FK_FUNCIONARIO     INT,
+    @FK_ESPECIALIDADE   INT,
+    @NR_CRM             VARCHAR(20),
+    @DS_UF_CRM          CHAR(2)
+AS
+BEGIN
+    SET NOCOUNT ON;
+    SET XACT_ABORT ON;
+
+    IF NOT EXISTS (SELECT 1 FROM dbo.TB_FUNCIONARIOS WHERE PK_ID = @FK_FUNCIONARIO AND FL_ATIVO = 1)
+        THROW 50010, 'Funcionário não encontrado ou inativo!', 1;
+
+    IF NOT EXISTS (SELECT 1 FROM dbo.TB_ESPECIALIDADES WHERE PK_ID = @FK_ESPECIALIDADE)
+        THROW 50011, 'Especialidade não encontrada!', 1;
+
+    IF EXISTS (SELECT 1 FROM dbo.TB_MEDICOS WHERE FK_FUNCIONARIO = @FK_FUNCIONARIO)
+        THROW 50012, 'Este funcionário já está cadastrado como médico!', 1;
+
+    IF EXISTS (SELECT 1 FROM dbo.TB_MEDICOS WHERE NR_CRM = @NR_CRM AND DS_UF_CRM = @DS_UF_CRM)
+        THROW 50013, 'CRM já cadastrado!', 1;
+
+    INSERT INTO dbo.TB_MEDICOS (FK_FUNCIONARIO, FK_ESPECIALIDADE, NR_CRM, DS_UF_CRM, FL_ATIVO)
+    VALUES (@FK_FUNCIONARIO, @FK_ESPECIALIDADE, @NR_CRM, UPPER(@DS_UF_CRM), 1);
+
+    SELECT CAST(SCOPE_IDENTITY() AS INT) AS PK_ID;
+END
+GO
+
+CREATE OR ALTER PROCEDURE dbo.SP_MEDICOS_ATUALIZAR
+    @PK_ID              INT,
+    @FK_FUNCIONARIO     INT,
+    @FK_ESPECIALIDADE   INT,
+    @NR_CRM             VARCHAR(20),
+    @DS_UF_CRM          CHAR(2)
+AS
+BEGIN
+    SET NOCOUNT ON;
+    SET XACT_ABORT ON;
+
+    IF NOT EXISTS (SELECT 1 FROM dbo.TB_MEDICOS WHERE PK_ID = @PK_ID)
+        THROW 50014, 'Médico não encontrado!', 1;
+
+    IF NOT EXISTS (SELECT 1 FROM dbo.TB_FUNCIONARIOS WHERE PK_ID = @FK_FUNCIONARIO)
+        THROW 50010, 'Funcionário não encontrado ou inativo!', 1;
+
+    IF NOT EXISTS (SELECT 1 FROM dbo.TB_ESPECIALIDADES WHERE PK_ID = @FK_ESPECIALIDADE)
+        THROW 50011, 'Especialidade não encontrada!', 1;
+
+    IF EXISTS (SELECT 1 FROM dbo.TB_MEDICOS WHERE PK_ID <> @PK_ID AND FK_FUNCIONARIO = @FK_FUNCIONARIO)
+        THROW 50012, 'Este funcionário já está cadastrado como médico!', 1;
+
+    IF EXISTS (SELECT 1 FROM dbo.TB_MEDICOS WHERE PK_ID <> @PK_ID AND NR_CRM = @NR_CRM AND DS_UF_CRM = @DS_UF_CRM)
+        THROW 50013, 'CRM já cadastrado!', 1;
+
+    UPDATE dbo.TB_MEDICOS
+    SET FK_FUNCIONARIO = @FK_FUNCIONARIO,
+        FK_ESPECIALIDADE = @FK_ESPECIALIDADE,
+        NR_CRM = @NR_CRM,
+        DS_UF_CRM = UPPER(@DS_UF_CRM)
+    WHERE PK_ID = @PK_ID;
+END
+GO
+
+CREATE OR ALTER PROCEDURE dbo.SP_MEDICOS_DESATIVAR
+    @PK_ID INT
+AS
+BEGIN
+    SET NOCOUNT ON;
+    SET XACT_ABORT ON;
+
+    IF NOT EXISTS (SELECT 1 FROM dbo.TB_MEDICOS WHERE PK_ID = @PK_ID)
+        THROW 50014, 'Médico não encontrado!', 1;
+
+    UPDATE dbo.TB_MEDICOS SET FL_ATIVO = 0 WHERE PK_ID = @PK_ID;
+END
+GO

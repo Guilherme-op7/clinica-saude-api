@@ -1,0 +1,13 @@
+{
+    "summary": "Cadastrar paciente",
+    "description": "Cria um novo paciente (via procedure). Acesso: admin e recepção (exclusão: somente admin).",
+    "tags": [
+        "Pacientes"
+    ],
+    "security": [
+        {
+            "apiKeyAuth": []
+        }
+    ],
+    "parameters": []
+}
