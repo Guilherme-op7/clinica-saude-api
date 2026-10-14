@@ -1,0 +1,21 @@
+{
+    "summary": "Buscar medicação por id",
+    "description": "Retorna uma medicação. Acesso: admin, recepção e médico.",
+    "tags": [
+        "Medicações"
+    ],
+    "security": [
+        {
+            "apiKeyAuth": []
+        }
+    ],
+    "parameters": [
+        {
+            "name": "id",
+            "description": "Id da medicação",
+            "in": "path",
+            "required": true,
+            "type": "integer"
+        }
+    ]
+}

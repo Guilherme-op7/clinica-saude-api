@@ -1,0 +1,21 @@
+{
+    "summary": "Buscar médico por id",
+    "description": "Retorna um médico. Acesso: admin, recepção, médico e paciente.",
+    "tags": [
+        "Médicos"
+    ],
+    "security": [
+        {
+            "apiKeyAuth": []
+        }
+    ],
+    "parameters": [
+        {
+            "name": "id",
+            "description": "Id do médico",
+            "in": "path",
+            "required": true,
+            "type": "integer"
+        }
+    ]
+}

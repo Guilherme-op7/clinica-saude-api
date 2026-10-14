@@ -1,0 +1,56 @@
+{
+    "200": {
+        "description": "Médico encontrado",
+        "schema": {
+            "type": "object",
+            "properties": {
+                "PK_ID": {
+                    "type": "integer"
+                },
+                "FK_FUNCIONARIO": {
+                    "type": "integer"
+                },
+                "FK_ESPECIALIDADE": {
+                    "type": "integer"
+                },
+                "NR_CRM": {
+                    "type": "string"
+                },
+                "DS_UF_CRM": {
+                    "type": "string"
+                },
+                "FL_ATIVO": {
+                    "type": "boolean"
+                }
+            }
+        }
+    },
+    "403": {
+        "description": "Sem permissão",
+        "schema": {
+            "type": "object",
+            "properties": {
+                "errorID": {
+                    "type": "string"
+                },
+                "msg": {
+                    "type": "string"
+                }
+            }
+        }
+    },
+    "404": {
+        "description": "Médico não encontrado",
+        "schema": {
+            "type": "object",
+            "properties": {
+                "errorID": {
+                    "type": "string"
+                },
+                "msg": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

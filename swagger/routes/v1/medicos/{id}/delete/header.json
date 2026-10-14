@@ -1,0 +1,21 @@
+{
+    "summary": "Desativar médico",
+    "description": "Soft delete via procedure: marca o médico como inativo (não exclui a linha). Acesso: somente admin.",
+    "tags": [
+        "Médicos"
+    ],
+    "security": [
+        {
+            "apiKeyAuth": []
+        }
+    ],
+    "parameters": [
+        {
+            "name": "id",
+            "description": "Id do médico",
+            "in": "path",
+            "required": true,
+            "type": "integer"
+        }
+    ]
+}

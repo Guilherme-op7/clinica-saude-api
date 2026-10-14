@@ -1,0 +1,21 @@
+{
+    "summary": "Atualizar medicação",
+    "description": "Atualiza uma medicação existente (via procedure). Acesso: somente admin.",
+    "tags": [
+        "Medicações"
+    ],
+    "security": [
+        {
+            "apiKeyAuth": []
+        }
+    ],
+    "parameters": [
+        {
+            "name": "id",
+            "description": "Id da medicação",
+            "in": "path",
+            "required": true,
+            "type": "integer"
+        }
+    ]
+}

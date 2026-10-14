@@ -1,0 +1,21 @@
+{
+    "summary": "Buscar paciente por id",
+    "description": "Retorna um paciente. Acesso: admin, recepção e médico (o paciente só consulta o próprio cadastro).",
+    "tags": [
+        "Pacientes"
+    ],
+    "security": [
+        {
+            "apiKeyAuth": []
+        }
+    ],
+    "parameters": [
+        {
+            "name": "id",
+            "description": "Id do paciente",
+            "in": "path",
+            "required": true,
+            "type": "integer"
+        }
+    ]
+}

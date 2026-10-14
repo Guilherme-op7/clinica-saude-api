@@ -1,0 +1,21 @@
+{
+    "summary": "Desativar paciente",
+    "description": "Soft delete via procedure: marca o paciente como inativo (não exclui a linha). Acesso: somente admin.",
+    "tags": [
+        "Pacientes"
+    ],
+    "security": [
+        {
+            "apiKeyAuth": []
+        }
+    ],
+    "parameters": [
+        {
+            "name": "id",
+            "description": "Id do paciente",
+            "in": "path",
+            "required": true,
+            "type": "integer"
+        }
+    ]
+}

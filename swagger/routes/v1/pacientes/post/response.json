@@ -1,0 +1,44 @@
+{
+    "201": {
+        "description": "Paciente criado",
+        "schema": {
+            "type": "object",
+            "properties": {
+                "idpaciente": {
+                    "type": "integer"
+                }
+            }
+        }
+    },
+    "400": {
+        "description": "Erro de validação ou CPF/cartão SUS já cadastrado",
+        "schema": {
+            "type": "object",
+            "properties": {
+                "errorID": {
+                    "type": "string"
+                },
+                "msg": {
+                    "type": "string"
+                },
+                "error": {
+                    "type": "object"
+                }
+            }
+        }
+    },
+    "403": {
+        "description": "Sem permissão",
+        "schema": {
+            "type": "object",
+            "properties": {
+                "errorID": {
+                    "type": "string"
+                },
+                "msg": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

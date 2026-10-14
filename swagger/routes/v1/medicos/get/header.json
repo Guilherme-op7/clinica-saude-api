@@ -1,0 +1,28 @@
+{
+    "summary": "Listar medicos",
+    "description": "Lista medicos com filtros opcionais. Acesso: admin, recepção, médico e paciente.",
+    "tags": [
+        "Médicos"
+    ],
+    "security": [
+        {
+            "apiKeyAuth": []
+        }
+    ],
+    "parameters": [
+        {
+            "name": "especialidade",
+            "description": "Filtra pelo id da especialidade",
+            "in": "query",
+            "required": false,
+            "type": "integer"
+        },
+        {
+            "name": "ativo",
+            "description": "Filtra por status (\"true\" ou \"false\")",
+            "in": "query",
+            "required": false,
+            "type": "string"
+        }
+    ]
+}

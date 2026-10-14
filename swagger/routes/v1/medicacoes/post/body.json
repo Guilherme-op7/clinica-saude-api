@@ -1,0 +1,34 @@
+{
+    "description": "Dados da medicação",
+    "type": "object",
+    "example": {
+        "DS_NOME": {
+            "type": "string",
+            "example": "Dipirona"
+        },
+        "DS_PRINCIPIO_ATIVO": {
+            "type": "string",
+            "example": "Dipirona monoidratada"
+        },
+        "DS_FABRICANTE": {
+            "type": "string",
+            "example": "EMS"
+        },
+        "DS_FORMA_FARMACEUTICA": {
+            "type": "string",
+            "example": "Comprimido"
+        },
+        "DS_DOSAGEM": {
+            "type": "string",
+            "example": "500 mg"
+        },
+        "FL_CONTROLADA": {
+            "type": "boolean",
+            "example": false
+        },
+        "DS_OBSERVACOES": {
+            "type": "string",
+            "example": "Uso oral"
+        }
+    }
+}

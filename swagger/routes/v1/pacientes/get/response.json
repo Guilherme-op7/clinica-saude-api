@@ -1,0 +1,76 @@
+{
+    "200": {
+        "description": "Lista de pacientes",
+        "schema": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "PK_ID": {
+                        "type": "integer"
+                    },
+                    "DS_NOME": {
+                        "type": "string"
+                    },
+                    "NR_CPF": {
+                        "type": "string"
+                    },
+                    "NR_CARTAO_SUS": {
+                        "type": "string"
+                    },
+                    "DT_NASCIMENTO": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "TP_SEXO": {
+                        "type": "string",
+                        "enum": [
+                            "M",
+                            "F",
+                            "O"
+                        ]
+                    },
+                    "DS_TELEFONE": {
+                        "type": "string"
+                    },
+                    "DS_EMAIL": {
+                        "type": "string"
+                    },
+                    "DS_ENDERECO": {
+                        "type": "string"
+                    },
+                    "DS_TIPO_SANGUINEO": {
+                        "type": "string"
+                    },
+                    "DS_ALERGIAS": {
+                        "type": "string"
+                    },
+                    "DS_CONTATO_EMERGENCIA": {
+                        "type": "string"
+                    },
+                    "TP_STATUS": {
+                        "type": "string",
+                        "enum": [
+                            "ativo",
+                            "inativo"
+                        ]
+                    }
+                }
+            }
+        }
+    },
+    "403": {
+        "description": "Sem permissão (precisa ser admin, recepção ou médico)",
+        "schema": {
+            "type": "object",
+            "properties": {
+                "errorID": {
+                    "type": "string"
+                },
+                "msg": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

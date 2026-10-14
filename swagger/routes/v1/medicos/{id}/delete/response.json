@@ -1,0 +1,36 @@
+{
+    "200": {
+        "description": "Médico desativado",
+        "schema": {
+            "type": "object"
+        }
+    },
+    "403": {
+        "description": "Sem permissão (precisa ser admin)",
+        "schema": {
+            "type": "object",
+            "properties": {
+                "errorID": {
+                    "type": "string"
+                },
+                "msg": {
+                    "type": "string"
+                }
+            }
+        }
+    },
+    "404": {
+        "description": "Médico não encontrado",
+        "schema": {
+            "type": "object",
+            "properties": {
+                "errorID": {
+                    "type": "string"
+                },
+                "msg": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,44 @@
+{
+    "201": {
+        "description": "Médico criado",
+        "schema": {
+            "type": "object",
+            "properties": {
+                "idmedico": {
+                    "type": "integer"
+                }
+            }
+        }
+    },
+    "400": {
+        "description": "Erro de validação, funcionário/especialidade inexistente ou CRM já cadastrado",
+        "schema": {
+            "type": "object",
+            "properties": {
+                "errorID": {
+                    "type": "string"
+                },
+                "msg": {
+                    "type": "string"
+                },
+                "error": {
+                    "type": "object"
+                }
+            }
+        }
+    },
+    "403": {
+        "description": "Sem permissão",
+        "schema": {
+            "type": "object",
+            "properties": {
+                "errorID": {
+                    "type": "string"
+                },
+                "msg": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

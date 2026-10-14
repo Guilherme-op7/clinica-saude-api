@@ -1,0 +1,13 @@
+{
+    "summary": "Cadastrar medicação",
+    "description": "Cria uma nova medicação (via procedure). Acesso: somente admin.",
+    "tags": [
+        "Medicações"
+    ],
+    "security": [
+        {
+            "apiKeyAuth": []
+        }
+    ],
+    "parameters": []
+}

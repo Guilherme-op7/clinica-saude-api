@@ -1,0 +1,21 @@
+{
+    "summary": "Atualizar paciente",
+    "description": "Atualiza um paciente existente (via procedure). Acesso: admin e recepção (exclusão: somente admin).",
+    "tags": [
+        "Pacientes"
+    ],
+    "security": [
+        {
+            "apiKeyAuth": []
+        }
+    ],
+    "parameters": [
+        {
+            "name": "id",
+            "description": "Id do paciente",
+            "in": "path",
+            "required": true,
+            "type": "integer"
+        }
+    ]
+}

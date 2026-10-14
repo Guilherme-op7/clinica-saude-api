@@ -1,0 +1,65 @@
+{
+    "200": {
+        "description": "Medicação encontrada",
+        "schema": {
+            "type": "object",
+            "properties": {
+                "PK_ID": {
+                    "type": "integer"
+                },
+                "DS_NOME": {
+                    "type": "string"
+                },
+                "DS_PRINCIPIO_ATIVO": {
+                    "type": "string"
+                },
+                "DS_FABRICANTE": {
+                    "type": "string"
+                },
+                "DS_FORMA_FARMACEUTICA": {
+                    "type": "string"
+                },
+                "DS_DOSAGEM": {
+                    "type": "string"
+                },
+                "FL_CONTROLADA": {
+                    "type": "boolean"
+                },
+                "DS_OBSERVACOES": {
+                    "type": "string"
+                },
+                "FL_ATIVO": {
+                    "type": "boolean"
+                }
+            }
+        }
+    },
+    "403": {
+        "description": "Sem permissão",
+        "schema": {
+            "type": "object",
+            "properties": {
+                "errorID": {
+                    "type": "string"
+                },
+                "msg": {
+                    "type": "string"
+                }
+            }
+        }
+    },
+    "404": {
+        "description": "Medicação não encontrada",
+        "schema": {
+            "type": "object",
+            "properties": {
+                "errorID": {
+                    "type": "string"
+                },
+                "msg": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
