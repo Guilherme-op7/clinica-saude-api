@@ -152,11 +152,92 @@ h1 em,h2 em{display:block;font-family:var(--serif);font-weight:400;font-style:it
 .qz .nx:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
 .qz .score{font-weight:900;font-size:clamp(2.6rem,7vw,4.5rem);letter-spacing:-.03em}
 
+
+/* ===== v3: motion & design ===== */
+html:not(.ready){overflow:hidden}
+body::after{content:"";position:fixed;inset:0;z-index:60;pointer-events:none;opacity:.09;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+body::before{content:"";position:fixed;inset:0;z-index:59;pointer-events:none;background:radial-gradient(ellipse at center,transparent 55%,rgba(0,0,0,.55))}
+#fx{position:fixed;inset:0;z-index:0;pointer-events:none}
+#intro{position:fixed;inset:0;z-index:100;background:var(--bg);display:grid;place-items:center;transition:opacity .8s .1s,visibility .8s .1s}
+html.ready #intro{opacity:0;visibility:hidden}
+.intro-in{text-align:center}
+.intro-bar{display:flex;flex-direction:column;width:min(280px,60vw);height:18px;margin:0 auto 26px;overflow:hidden;border-radius:3px}
+.intro-bar i{flex:1;transform:translateX(-101%);animation:sweep .9s cubic-bezier(.7,0,.2,1) forwards}
+.intro-bar i:nth-child(1){background:#000;outline:1px solid #333}.intro-bar i:nth-child(2){background:#dd0000;animation-delay:.12s}.intro-bar i:nth-child(3){background:#ffce00;animation-delay:.24s}
+@keyframes sweep{to{transform:none}}
+.intro-word{font-weight:900;font-size:clamp(2rem,8vw,5.5rem);letter-spacing:-.03em;display:flex;justify-content:center;overflow:hidden;line-height:1.05}
+.intro-word span{display:inline-block;transform:translateY(110%);animation:rise .8s cubic-bezier(.2,.8,.2,1) forwards;animation-delay:calc(.5s + var(--i)*45ms)}
+@keyframes rise{to{transform:none}}
+.intro-sub{margin-top:14px;font-family:var(--mono);font-size:11px;letter-spacing:.3em;color:var(--mute);opacity:0;animation:fadein .8s 1.3s forwards}
+@keyframes fadein{to{opacity:1}}
+.cue{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);z-index:20;display:flex;flex-direction:column;align-items:center;gap:8px;font-family:var(--mono);font-size:10px;letter-spacing:.3em;color:var(--mute);pointer-events:none;transition:opacity .4s}
+.cue i{display:block;width:1px;height:38px;background:linear-gradient(var(--gold),transparent);transform-origin:top;animation:cue 1.8s ease-in-out infinite}
+@keyframes cue{0%{transform:scaleY(0)}50%{transform:scaleY(1)}100%{transform:scaleY(1);opacity:0}}
+.cue.hide{opacity:0}
+.hud-r{display:flex;gap:10px;align-items:center}.ring{width:26px;height:26px}
+#line .head{position:absolute;left:50%;top:0;width:12px;height:12px;margin:-6px 0 0 -6px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 4px rgba(232,185,60,.18),0 0 22px 6px rgba(232,185,60,.55)}
+#ghost{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);z-index:1;pointer-events:none;white-space:nowrap;font-weight:900;font-size:min(46vw,76vh);line-height:1;letter-spacing:-.06em;color:transparent;-webkit-text-stroke:1.5px rgba(255,255,255,.06)}
+#ghost span{display:block;animation:ghostIn .9s cubic-bezier(.2,.8,.2,1)}
+@keyframes ghostIn{from{opacity:0;transform:translateY(40px) scale(.94)}}
+.orbit{position:fixed;left:50%;top:50%;width:calc(var(--fig)*1.42);height:calc(var(--fig)*1.42);transform:translate(-50%,-50%);pointer-events:none}
+.orbit svg{width:100%;height:100%;overflow:visible;transform:rotate(var(--rot,0deg))}
+.orbit text{font-family:var(--mono);font-size:6.2px;fill:#8c867a;letter-spacing:.2em}
+.orbit .dash{fill:none;stroke:rgba(255,255,255,.1);stroke-dasharray:1 5;stroke-linecap:round}
+.orbit .arc{fill:none;stroke:var(--accent,#e2412f);stroke-width:1.2;stroke-dasharray:60 520;stroke-linecap:round;transition:stroke .6s}
+.fig svg{transform:rotateY(calc(var(--ry,0deg) + var(--mx,0)*9deg)) rotateX(calc(var(--rx,0deg) + var(--my,0)*-7deg)) scale(var(--sc,1)) translate3d(calc(var(--mx,0)*10px),calc(var(--my,0)*7px),0);animation:bob 7s ease-in-out infinite}
+@keyframes bob{50%{translate:0 -9px}}
+h1 .ln,h2 .ln{display:block;overflow:hidden;padding:.02em .04em .14em;margin-bottom:-.12em}
+h1 .ln>span,h2 .ln>span{display:inline-block;transform:translateY(115%)}
+h1 em,h2 em{transition:color .6s;color:var(--accent,var(--red))}
+.copy.in .ln>span{transform:none;transition:transform 1s cubic-bezier(.2,.8,.2,1);transition-delay:calc(.12s + var(--i)*.12s)}
+.rv{opacity:0;transform:translateY(22px);filter:blur(6px)}
+.copy.in .rv{opacity:1;transform:none;filter:none;transition:opacity .8s,transform .9s cubic-bezier(.2,.8,.2,1),filter .8s;transition-delay:var(--d,0s)}
+.copy.in .data li{animation:li .7s both;animation-delay:calc(.55s + var(--k)*.08s)}
+@keyframes li{from{opacity:0;transform:translateX(-10px)}}
+.fact{border-left-color:var(--accent,var(--gold))}
+.rvs{opacity:0;transform:translateY(30px) scale(.985);transition:opacity .8s,transform .9s cubic-bezier(.2,.7,.2,1),border-color .25s;transition-delay:calc(var(--i,0)*70ms)}
+.rvs.vis{opacity:1;transform:none}
+.card:hover{transform:none}.card.vis:hover{transform:translateY(-4px)}
+.band{position:relative;z-index:4;overflow:hidden;padding:14vh 0 12vh;display:grid;gap:1vw;pointer-events:none}
+.band .row{display:flex;white-space:nowrap;font-weight:900;text-transform:uppercase;letter-spacing:-.04em;font-size:clamp(3rem,10vw,9rem);line-height:1;will-change:transform}
+.band .row span{padding-right:.5em}
+.band .a{color:transparent;-webkit-text-stroke:1.5px rgba(255,255,255,.3)}
+.band .b{background:linear-gradient(90deg,#444,var(--red),var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent}
+.sec{position:relative;z-index:4;padding:10vh clamp(20px,5vw,72px);max-width:1360px;margin:0 auto}
+.lander{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.fl{perspective:900px;min-height:132px}
+.fl button{all:unset;cursor:pointer;display:block;position:relative;width:100%;height:132px;transform-style:preserve-3d;transition:transform .7s cubic-bezier(.2,.8,.2,1)}
+.fl button:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:16px}
+.fl.on button{transform:rotateY(180deg)}
+@media (hover:hover){.fl:hover button{transform:rotateY(180deg)}}
+.fl .f,.fl .bk{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:16px;padding:16px 18px;border:1px solid rgba(255,255,255,.1);display:flex;flex-direction:column;justify-content:space-between}
+.fl .f{background:#141414}
+.fl .bk{transform:rotateY(180deg);background:linear-gradient(145deg,#1d1612,#141414);border-color:rgba(232,185,60,.45)}
+.fl .abbr{font-family:var(--mono);font-size:10px;letter-spacing:.2em;color:var(--gold)}
+.fl .nm{font-weight:800;font-size:1.02rem;text-transform:uppercase;line-height:1.1;letter-spacing:-.01em}
+.fl .cap{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;color:var(--gold);text-transform:uppercase}
+.fl .tx{font-size:.8rem;line-height:1.4;color:#d0cabd}
+.rail{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 2px 24px;scrollbar-width:none;cursor:grab}
+.rail::-webkit-scrollbar{display:none}
+.gw{flex:0 0 clamp(240px,26vw,300px);scroll-snap-align:start;background:#141414;border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:22px 22px 24px;min-height:240px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden;transition:border-color .3s}
+.gw::before{content:"";position:absolute;inset:auto -30% -50% -30%;height:70%;background:radial-gradient(closest-side,rgba(232,185,60,.18),transparent);opacity:0;transition:opacity .4s}
+.gw:hover{border-color:rgba(232,185,60,.5)}.gw:hover::before{opacity:1}
+.gw .pr{font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:var(--mute)}
+.gw .w{font-weight:900;font-size:clamp(1.3rem,2.2vw,1.8rem);letter-spacing:-.02em;line-height:1.05;word-break:break-word;margin:18px 0 10px;background:linear-gradient(90deg,var(--ink),var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent}
+.gw .m{font-size:.88rem;line-height:1.5;color:#c9c3b6}
+.rail-ctl{display:flex;gap:10px;justify-content:flex-end;margin-bottom:8px}
+.rail-ctl button{all:unset;cursor:pointer;width:42px;height:42px;border-radius:50%;border:1px solid rgba(255,255,255,.2);display:grid;place-items:center;font-family:var(--mono);transition:all .25s}
+.rail-ctl button:hover{background:var(--gold);color:#0d0d0d;border-color:var(--gold)}
+.rail-ctl button:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+
 /* mobile */
 @media (max-width:899px){
   :root{--fig:min(62vw,36vh)}
-  .fig{top:33%}
+  .fig,.orbit,#ghost{top:33%}
   #stage::before{top:33%}
+  .lander{grid-template-columns:repeat(2,1fr)}
+  .fl,.fl button{height:150px}
+  .cue{bottom:14px}
   .sticky{align-items:flex-end;padding:0 16px 5vh}
   .copy,.copy.left,.copy.right{width:100%;margin:0;background:rgba(13,13,13,.88);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:18px 18px 16px}
   h1,h2{font-size:clamp(1.5rem,7vw,2rem);margin-bottom:10px}
@@ -174,6 +255,7 @@ h1 em,h2 em{display:block;font-family:var(--serif);font-weight:400;font-style:it
   .hud span.hide-m{display:none}
 }
 @media (max-width:520px){
+  .lander{grid-template-columns:1fr 1fr;gap:10px}
   .grid{grid-template-columns:1fr}
   .bar{grid-template-columns:84px 1fr 48px}
 }
@@ -446,13 +528,18 @@ h1 em,h2 em{display:block;font-family:var(--serif);font-weight:400;font-style:it
 
 <header class="hud">
   <div class="brand"><span class="flag"><i></i><i></i><i></i></span><b>Deutschland</b><span class="hide-m">· 51°N 10°E</span></div>
-  <div><b id="counter">01</b> / 11</div>
+  <div class="hud-r"><svg class="ring" viewBox="0 0 36 36" aria-hidden="true"><defs><linearGradient id="ringG"><stop offset="0" stop-color="#e2412f"/><stop offset="1" stop-color="#e8b93c"/></linearGradient></defs><circle cx="18" cy="18" r="15" fill="none" stroke="rgba(255,255,255,.12)" stroke-width="2.5"/><circle id="ringFg" cx="18" cy="18" r="15" fill="none" stroke="url(#ringG)" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="94.25" stroke-dashoffset="94.25" transform="rotate(-90 18 18)"/></svg><span><b id="counter">01</b> / 11</span></div>
 </header>
 
+<div id="intro" aria-hidden="true"><div class="intro-in"><div class="intro-bar"><i></i><i></i><i></i></div><div class="intro-word" id="introWord"></div><div class="intro-sub">UMA JORNADA EM 11 ATOS</div></div></div>
+<canvas id="fx"></canvas>
+<div class="cue" id="cue"><span>ROLE</span><i></i></div>
 <nav id="dots" aria-label="Navegação por atos"></nav>
 <div class="keys"><kbd>←</kbd><kbd>→</kbd> NAVEGAR ATOS</div>
-<div id="line" aria-hidden="true"><div class="fill" id="fill"></div></div>
+<div id="line" aria-hidden="true"><div class="fill" id="fill"></div><i class="head" id="head"></i></div>
+<div id="ghost" aria-hidden="true"><span id="ghostN">01</span></div>
 <div id="stage" aria-hidden="false">
+<div class="orbit" id="orbit"><svg viewBox="0 0 200 200"><circle class="dash" cx="100" cy="100" r="98"/><circle class="arc" cx="100" cy="100" r="98"/><defs><path id="orbPath" d="M100,100 m-90,0 a90,90 0 1,1 180,0 a90,90 0 1,1 -180,0"/></defs><text><textPath href="#orbPath" id="orbText" textLength="563" lengthAdjust="spacing"></textPath></text></svg></div>
 <div class="fig" data-fig="1"><svg role="img" aria-label="Panorama Geral"><use href="#s1"/></svg></div>
 <div class="fig" data-fig="2"><svg role="img" aria-label="Localização e Geografia"><use href="#s2"/></svg></div>
 <div class="fig" data-fig="3"><svg role="img" aria-label="Cidades e Estados"><use href="#s7"/></svg></div>
@@ -470,110 +557,110 @@ h1 em,h2 em{display:block;font-family:var(--serif);font-weight:400;font-style:it
 <section class="act" id="ato1" data-act="1" data-label="Panorama Geral" aria-label="Panorama Geral">
   <div class="sticky">
     <div class="copy left">
-      <p class="kicker"><span>ATO 01</span> / 11 — PANORAMA GERAL</p>
-      <h1>PANORAMA <em>geral</em></h1>
-      <p class="lead">A República Federal da Alemanha (<i>Bundesrepublik Deutschland</i>) é uma democracia parlamentarista e federal. Sua capital é Berlim, o idioma oficial é o alemão e a moeda é o Euro. Com a maior população da União Europeia, é também a maior economia da Europa e uma das mais industrializadas e exportadoras do planeta.</p>
-      <ul class="data"><li><b>CAPITAL:</b> BERLIM</li><li><b>POPULAÇÃO:</b> ~84,5 MI</li><li><b>MOEDA:</b> EURO (€)</li><li><b>IDIOMA:</b> ALEMÃO</li></ul>
-      <p class="fact"><b>VOCÊ SABIA?</b> As cores preto, vermelho e ouro da bandeira remontam ao século XIX e ao movimento pela democracia e pela unidade nacional.</p>
+      <p class="kicker rv" style="--d:0s"><span>ATO 01</span> / 11 — PANORAMA GERAL</p>
+      <h1><span class="ln"><span style="--i:0">PANORAMA</span></span><em class="ln"><span style="--i:1">geral</span></em></h1>
+      <p class="lead rv" style="--d:.35s">A República Federal da Alemanha (<i>Bundesrepublik Deutschland</i>) é uma democracia parlamentarista e federal. Sua capital é Berlim, o idioma oficial é o alemão e a moeda é o Euro. Com a maior população da União Europeia, é também a maior economia da Europa e uma das mais industrializadas e exportadoras do planeta.</p>
+      <ul class="data rv" style="--d:.5s"><li style="--k:0"><b>CAPITAL:</b> BERLIM</li><li style="--k:1"><b>POPULAÇÃO:</b> ~84,5 MI</li><li style="--k:2"><b>MOEDA:</b> EURO (€)</li><li style="--k:3"><b>IDIOMA:</b> ALEMÃO</li></ul>
+      <p class="fact rv" style="--d:.9s"><b>VOCÊ SABIA?</b> As cores preto, vermelho e ouro da bandeira remontam ao século XIX e ao movimento pela democracia e pela unidade nacional.</p>
     </div>
   </div>
 </section>
 <section class="act" id="ato2" data-act="2" data-label="Localização e Geografia" aria-label="Localização e Geografia">
   <div class="sticky">
     <div class="copy right">
-      <p class="kicker"><span>ATO 02</span> / 11 — LOCALIZAÇÃO E GEOGRAFIA</p>
-      <h2>NO CENTRO <em>da Europa</em></h2>
-      <p class="lead">Situada no coração da Europa Central, a Alemanha faz fronteira com 9 países: Dinamarca, Polônia, República Tcheca, Áustria, Suíça, França, Luxemburgo, Bélgica e Países Baixos. O relevo vai das planícies do Mar do Norte e do Báltico até os Alpes Bávaros, ao sul, e é cortado por rios estratégicos como o Reno, o Elba e o Danúbio.</p>
-      <ul class="data"><li><b>COORD.:</b> 51°N 10°E</li><li><b>ÁREA:</b> 357.588 KM²</li><li><b>FRONTEIRAS:</b> 9</li><li><b>ESTADOS:</b> 16 (LÄNDER)</li></ul>
-      <p class="fact"><b>VOCÊ SABIA?</b> O ponto mais alto do país é o Zugspitze, nos Alpes, com 2.962 metros.</p>
+      <p class="kicker rv" style="--d:0s"><span>ATO 02</span> / 11 — LOCALIZAÇÃO E GEOGRAFIA</p>
+      <h2><span class="ln"><span style="--i:0">NO CENTRO</span></span><em class="ln"><span style="--i:1">da Europa</span></em></h2>
+      <p class="lead rv" style="--d:.35s">Situada no coração da Europa Central, a Alemanha faz fronteira com 9 países: Dinamarca, Polônia, República Tcheca, Áustria, Suíça, França, Luxemburgo, Bélgica e Países Baixos. O relevo vai das planícies do Mar do Norte e do Báltico até os Alpes Bávaros, ao sul, e é cortado por rios estratégicos como o Reno, o Elba e o Danúbio.</p>
+      <ul class="data rv" style="--d:.5s"><li style="--k:0"><b>COORD.:</b> 51°N 10°E</li><li style="--k:1"><b>ÁREA:</b> 357.588 KM²</li><li style="--k:2"><b>FRONTEIRAS:</b> 9</li><li style="--k:3"><b>ESTADOS:</b> 16 (LÄNDER)</li></ul>
+      <p class="fact rv" style="--d:.9s"><b>VOCÊ SABIA?</b> O ponto mais alto do país é o Zugspitze, nos Alpes, com 2.962 metros.</p>
     </div>
   </div>
 </section>
 <section class="act" id="ato3" data-act="3" data-label="Cidades e Estados" aria-label="Cidades e Estados">
   <div class="sticky">
     <div class="copy left">
-      <p class="kicker"><span>ATO 03</span> / 11 — CIDADES E ESTADOS</p>
-      <h2>CIDADES <em>& estados</em></h2>
-      <p class="lead">A Alemanha é uma federação de 16 estados (<i>Länder</i>), três deles cidades-estado: Berlim, Hamburgo e Bremen. Berlim é a capital e a maior cidade; Munique, na Baviera, une tradição e tecnologia; Hamburgo é o grande porto do norte; Colônia abriga uma catedral gótica Patrimônio da UNESCO; e Frankfurt é o centro financeiro e sede do Banco Central Europeu.</p>
-      <ul class="data"><li><b>ESTADOS:</b> 16</li><li><b>CIDADES-ESTADO:</b> 3</li><li><b>MAIOR CIDADE:</b> BERLIM ~3,7 MI</li></ul>
-      <p class="fact"><b>VOCÊ SABIA?</b> Berlim é frequentemente citada por ter mais pontes que Veneza: cerca de 1.700.</p>
+      <p class="kicker rv" style="--d:0s"><span>ATO 03</span> / 11 — CIDADES E ESTADOS</p>
+      <h2><span class="ln"><span style="--i:0">CIDADES</span></span><em class="ln"><span style="--i:1">& estados</span></em></h2>
+      <p class="lead rv" style="--d:.35s">A Alemanha é uma federação de 16 estados (<i>Länder</i>), três deles cidades-estado: Berlim, Hamburgo e Bremen. Berlim é a capital e a maior cidade; Munique, na Baviera, une tradição e tecnologia; Hamburgo é o grande porto do norte; Colônia abriga uma catedral gótica Patrimônio da UNESCO; e Frankfurt é o centro financeiro e sede do Banco Central Europeu.</p>
+      <ul class="data rv" style="--d:.5s"><li style="--k:0"><b>ESTADOS:</b> 16</li><li style="--k:1"><b>CIDADES-ESTADO:</b> 3</li><li style="--k:2"><b>MAIOR CIDADE:</b> BERLIM ~3,7 MI</li></ul>
+      <p class="fact rv" style="--d:.9s"><b>VOCÊ SABIA?</b> Berlim é frequentemente citada por ter mais pontes que Veneza: cerca de 1.700.</p>
     </div>
   </div>
 </section>
 <section class="act" id="ato4" data-act="4" data-label="História Completa" aria-label="História Completa">
   <div class="sticky">
     <div class="copy right">
-      <p class="kicker"><span>ATO 04</span> / 11 — HISTÓRIA COMPLETA</p>
-      <h2>HISTÓRIA <em>completa</em></h2>
-      <p class="lead">Das tribos germânicas que resistiram ao Império Romano ao Sacro Império Romano-Germânico; da Reforma Protestante de Martinho Lutero (1517) à unificação liderada por Otto von Bismarck (1871). O século XX foi marcado pelas duas Guerras Mundiais e pela divisão da Guerra Fria, simbolizada pelo Muro de Berlim (1961–1989), até a histórica Reunificação, em 1990.</p>
-      <ul class="data"><li><b>1517:</b> REFORMA</li><li><b>1871:</b> UNIFICAÇÃO</li><li><b>1989:</b> QUEDA DO MURO</li><li><b>1990:</b> REUNIFICAÇÃO</li></ul>
-      <p class="fact"><b>VOCÊ SABIA?</b> O Muro de Berlim cercava Berlim Ocidental por cerca de 155 km. Veja a linha do tempo completa mais adiante.</p>
+      <p class="kicker rv" style="--d:0s"><span>ATO 04</span> / 11 — HISTÓRIA COMPLETA</p>
+      <h2><span class="ln"><span style="--i:0">HISTÓRIA</span></span><em class="ln"><span style="--i:1">completa</span></em></h2>
+      <p class="lead rv" style="--d:.35s">Das tribos germânicas que resistiram ao Império Romano ao Sacro Império Romano-Germânico; da Reforma Protestante de Martinho Lutero (1517) à unificação liderada por Otto von Bismarck (1871). O século XX foi marcado pelas duas Guerras Mundiais e pela divisão da Guerra Fria, simbolizada pelo Muro de Berlim (1961–1989), até a histórica Reunificação, em 1990.</p>
+      <ul class="data rv" style="--d:.5s"><li style="--k:0"><b>1517:</b> REFORMA</li><li style="--k:1"><b>1871:</b> UNIFICAÇÃO</li><li style="--k:2"><b>1989:</b> QUEDA DO MURO</li><li style="--k:3"><b>1990:</b> REUNIFICAÇÃO</li></ul>
+      <p class="fact rv" style="--d:.9s"><b>VOCÊ SABIA?</b> O Muro de Berlim cercava Berlim Ocidental por cerca de 155 km. Veja a linha do tempo completa mais adiante.</p>
     </div>
   </div>
 </section>
 <section class="act" id="ato5" data-act="5" data-label="Culinária e Pratos Típicos" aria-label="Culinária e Pratos Típicos">
   <div class="sticky">
     <div class="copy left">
-      <p class="kicker"><span>ATO 05</span> / 11 — CULINÁRIA E PRATOS TÍPICOS</p>
-      <h2>SABORES <em>da mesa alemã</em></h2>
-      <p class="lead">Uma gastronomia farta e regional. Famosa pela cultura de panificação, com mais de 3.000 tipos de pães (<i>Brot</i>) e o icônico Pretzel (<i>Brezel</i>). Entre os pratos tradicionais estão Currywurst, Schnitzel, Bratwurst, Sauerkraut (chucrute) e Spätzle. Na confeitaria, o Bolo Floresta Negra (<i>Schwarzwälder Kirschtorte</i>) e o Apfelstrudel; e a tradição cervejeira é regida pela Lei da Pureza (<i>Reinheitsgebot</i>) de 1516.</p>
-      <ul class="data"><li><b>PÃES:</b> +3.000 TIPOS</li><li><b>CERVEJARIAS:</b> +1.500</li><li><b>LEI DA PUREZA:</b> 1516</li></ul>
-      <p class="fact"><b>VOCÊ SABIA?</b> A Lei da Pureza listava originalmente apenas água, cevada e lúpulo; a levedura só foi reconhecida depois.</p>
+      <p class="kicker rv" style="--d:0s"><span>ATO 05</span> / 11 — CULINÁRIA E PRATOS TÍPICOS</p>
+      <h2><span class="ln"><span style="--i:0">SABORES</span></span><em class="ln"><span style="--i:1">da mesa alemã</span></em></h2>
+      <p class="lead rv" style="--d:.35s">Uma gastronomia farta e regional. Famosa pela cultura de panificação, com mais de 3.000 tipos de pães (<i>Brot</i>) e o icônico Pretzel (<i>Brezel</i>). Entre os pratos tradicionais estão Currywurst, Schnitzel, Bratwurst, Sauerkraut (chucrute) e Spätzle. Na confeitaria, o Bolo Floresta Negra (<i>Schwarzwälder Kirschtorte</i>) e o Apfelstrudel; e a tradição cervejeira é regida pela Lei da Pureza (<i>Reinheitsgebot</i>) de 1516.</p>
+      <ul class="data rv" style="--d:.5s"><li style="--k:0"><b>PÃES:</b> +3.000 TIPOS</li><li style="--k:1"><b>CERVEJARIAS:</b> +1.500</li><li style="--k:2"><b>LEI DA PUREZA:</b> 1516</li></ul>
+      <p class="fact rv" style="--d:.9s"><b>VOCÊ SABIA?</b> A Lei da Pureza listava originalmente apenas água, cevada e lúpulo; a levedura só foi reconhecida depois.</p>
     </div>
   </div>
 </section>
 <section class="act" id="ato6" data-act="6" data-label="Cultura, Castelos e Curiosidades" aria-label="Cultura, Castelos e Curiosidades">
   <div class="sticky">
     <div class="copy right">
-      <p class="kicker"><span>ATO 06</span> / 11 — CULTURA, CASTELOS E CURIOSIDADES</p>
-      <h2>CASTELOS <em>& curiosidades</em></h2>
-      <p class="lead">O país abriga mais de 20.000 castelos e palácios, como o fabuloso Neuschwanstein. Entre as curiosidades do cotidiano destacam-se o <i>Ruhetag</i> (domingo de descanso silencioso, quando as lojas fecham e barulhos domésticos são restritos por lei), a eficiência do sistema de reciclagem de garrafas (<i>Pfand</i>), a Oktoberfest de Munique e os tradicionais Mercados de Natal.</p>
-      <ul class="data"><li><b>CASTELOS:</b> +20.000</li><li><b>UNESCO:</b> 52 PATRIMÔNIOS</li><li><b>RECICLAGEM:</b> SISTEMA PFAND</li></ul>
-      <p class="fact"><b>VOCÊ SABIA?</b> Neuschwanstein é frequentemente apontado como inspiração para o castelo da Bela Adormecida, da Disney.</p>
+      <p class="kicker rv" style="--d:0s"><span>ATO 06</span> / 11 — CULTURA, CASTELOS E CURIOSIDADES</p>
+      <h2><span class="ln"><span style="--i:0">CASTELOS</span></span><em class="ln"><span style="--i:1">& curiosidades</span></em></h2>
+      <p class="lead rv" style="--d:.35s">O país abriga mais de 20.000 castelos e palácios, como o fabuloso Neuschwanstein. Entre as curiosidades do cotidiano destacam-se o <i>Ruhetag</i> (domingo de descanso silencioso, quando as lojas fecham e barulhos domésticos são restritos por lei), a eficiência do sistema de reciclagem de garrafas (<i>Pfand</i>), a Oktoberfest de Munique e os tradicionais Mercados de Natal.</p>
+      <ul class="data rv" style="--d:.5s"><li style="--k:0"><b>CASTELOS:</b> +20.000</li><li style="--k:1"><b>UNESCO:</b> 52 PATRIMÔNIOS</li><li style="--k:2"><b>RECICLAGEM:</b> SISTEMA PFAND</li></ul>
+      <p class="fact rv" style="--d:.9s"><b>VOCÊ SABIA?</b> Neuschwanstein é frequentemente apontado como inspiração para o castelo da Bela Adormecida, da Disney.</p>
     </div>
   </div>
 </section>
 <section class="act" id="ato7" data-act="7" data-label="Música e Esportes" aria-label="Música e Esportes">
   <div class="sticky">
     <div class="copy left">
-      <p class="kicker"><span>ATO 07</span> / 11 — MÚSICA E ESPORTES</p>
-      <h2>MÚSICA <em>& esportes</em></h2>
-      <p class="lead">Bach, Beethoven, Brahms e Wagner fazem da Alemanha uma das grandes pátrias da música clássica, hoje celebrada pela Filarmônica de Berlim e pelo Festival de Bayreuth. No esporte, o futebol é paixão nacional: a seleção é tetracampeã mundial e a Bundesliga tem uma das maiores médias de público do mundo. O país também sediou as Olimpíadas de Berlim (1936) e Munique (1972).</p>
-      <ul class="data"><li><b>COPAS DO MUNDO:</b> 4 (1954 · 74 · 90 · 2014)</li><li><b>BUNDESLIGA:</b> 18 CLUBES</li><li><b>OLIMPÍADAS:</b> 1936 · 1972</li></ul>
-      <p class="fact"><b>VOCÊ SABIA?</b> Beethoven nasceu em Bonn, em 1770, e compôs a Nona Sinfonia já completamente surdo.</p>
+      <p class="kicker rv" style="--d:0s"><span>ATO 07</span> / 11 — MÚSICA E ESPORTES</p>
+      <h2><span class="ln"><span style="--i:0">MÚSICA</span></span><em class="ln"><span style="--i:1">& esportes</span></em></h2>
+      <p class="lead rv" style="--d:.35s">Bach, Beethoven, Brahms e Wagner fazem da Alemanha uma das grandes pátrias da música clássica, hoje celebrada pela Filarmônica de Berlim e pelo Festival de Bayreuth. No esporte, o futebol é paixão nacional: a seleção é tetracampeã mundial e a Bundesliga tem uma das maiores médias de público do mundo. O país também sediou as Olimpíadas de Berlim (1936) e Munique (1972).</p>
+      <ul class="data rv" style="--d:.5s"><li style="--k:0"><b>COPAS DO MUNDO:</b> 4 (1954 · 74 · 90 · 2014)</li><li style="--k:1"><b>BUNDESLIGA:</b> 18 CLUBES</li><li style="--k:2"><b>OLIMPÍADAS:</b> 1936 · 1972</li></ul>
+      <p class="fact rv" style="--d:.9s"><b>VOCÊ SABIA?</b> Beethoven nasceu em Bonn, em 1770, e compôs a Nona Sinfonia já completamente surdo.</p>
     </div>
   </div>
 </section>
 <section class="act" id="ato8" data-act="8" data-label="Pensadores, Ciência e Engenharia" aria-label="Pensadores, Ciência e Engenharia">
   <div class="sticky">
     <div class="copy right">
-      <p class="kicker"><span>ATO 08</span> / 11 — PENSADORES, CIÊNCIA E ENGENHARIA</p>
-      <h2>MENTES <em>e máquinas</em></h2>
-      <p class="lead">Conhecida como o &ldquo;País dos Poetas e Pensadores&rdquo; (<i>Das Land der Dichter und Denker</i>), é berço de filósofos como Kant, Nietzsche e Marx; do escritor Goethe; e de compositores como Beethoven e Bach. Na ciência e na tecnologia brilharam Albert Einstein e invenções que mudaram o mundo: a prensa de Gutenberg, o automóvel de Karl Benz, o raio-X e o formato MP3.</p>
-      <ul class="data"><li><b>NOBEL:</b> +110</li><li><b>1450:</b> IMPRENSA</li><li><b>1886:</b> AUTOMÓVEL</li><li><b>1895:</b> RAIO-X</li></ul>
-      <p class="fact"><b>VOCÊ SABIA?</b> Gutenberg imprimiu sua famosa Bíblia de 42 linhas por volta de 1455.</p>
+      <p class="kicker rv" style="--d:0s"><span>ATO 08</span> / 11 — PENSADORES, CIÊNCIA E ENGENHARIA</p>
+      <h2><span class="ln"><span style="--i:0">MENTES</span></span><em class="ln"><span style="--i:1">e máquinas</span></em></h2>
+      <p class="lead rv" style="--d:.35s">Conhecida como o &ldquo;País dos Poetas e Pensadores&rdquo; (<i>Das Land der Dichter und Denker</i>), é berço de filósofos como Kant, Nietzsche e Marx; do escritor Goethe; e de compositores como Beethoven e Bach. Na ciência e na tecnologia brilharam Albert Einstein e invenções que mudaram o mundo: a prensa de Gutenberg, o automóvel de Karl Benz, o raio-X e o formato MP3.</p>
+      <ul class="data rv" style="--d:.5s"><li style="--k:0"><b>NOBEL:</b> +110</li><li style="--k:1"><b>1450:</b> IMPRENSA</li><li style="--k:2"><b>1886:</b> AUTOMÓVEL</li><li style="--k:3"><b>1895:</b> RAIO-X</li></ul>
+      <p class="fact rv" style="--d:.9s"><b>VOCÊ SABIA?</b> Gutenberg imprimiu sua famosa Bíblia de 42 linhas por volta de 1455.</p>
     </div>
   </div>
 </section>
 <section class="act" id="ato9" data-act="9" data-label="Economia e Indústria" aria-label="Economia e Indústria">
   <div class="sticky">
     <div class="copy left">
-      <p class="kicker"><span>ATO 09</span> / 11 — ECONOMIA E INDÚSTRIA</p>
-      <h2>ECONOMIA <em>& indústria</em></h2>
-      <p class="lead">A Alemanha é a maior economia da Europa e uma das maiores do mundo, movida pela exportação de máquinas, produtos químicos e, sobretudo, automóveis (Volkswagen, BMW, Mercedes-Benz, Audi, Porsche). O <i>Mittelstand</i>, rede de pequenas e médias empresas muitas vezes familiares, é a espinha dorsal do sistema, apoiado pelo ensino técnico dual, que une escola e prática na empresa.</p>
-      <ul class="data"><li><b>PIB:</b> ~US$ 4,5 TRI</li><li><b>AUTOBAHN:</b> ~13.000 KM</li><li><b>MOTOR:</b> MITTELSTAND</li></ul>
-      <p class="fact"><b>VOCÊ SABIA?</b> Em muitos trechos da Autobahn não há limite geral de velocidade, mas há uma velocidade recomendada de 130 km/h.</p>
+      <p class="kicker rv" style="--d:0s"><span>ATO 09</span> / 11 — ECONOMIA E INDÚSTRIA</p>
+      <h2><span class="ln"><span style="--i:0">ECONOMIA</span></span><em class="ln"><span style="--i:1">& indústria</span></em></h2>
+      <p class="lead rv" style="--d:.35s">A Alemanha é a maior economia da Europa e uma das maiores do mundo, movida pela exportação de máquinas, produtos químicos e, sobretudo, automóveis (Volkswagen, BMW, Mercedes-Benz, Audi, Porsche). O <i>Mittelstand</i>, rede de pequenas e médias empresas muitas vezes familiares, é a espinha dorsal do sistema, apoiado pelo ensino técnico dual, que une escola e prática na empresa.</p>
+      <ul class="data rv" style="--d:.5s"><li style="--k:0"><b>PIB:</b> ~US$ 4,5 TRI</li><li style="--k:1"><b>AUTOBAHN:</b> ~13.000 KM</li><li style="--k:2"><b>MOTOR:</b> MITTELSTAND</li></ul>
+      <p class="fact rv" style="--d:.9s"><b>VOCÊ SABIA?</b> Em muitos trechos da Autobahn não há limite geral de velocidade, mas há uma velocidade recomendada de 130 km/h.</p>
     </div>
   </div>
 </section>
 <section class="act" id="ato10" data-act="10" data-label="Natureza e Energia" aria-label="Natureza e Energia">
   <div class="sticky">
     <div class="copy right">
-      <p class="kicker"><span>ATO 10</span> / 11 — NATUREZA E ENERGIA</p>
-      <h2>NATUREZA <em>& energia</em></h2>
-      <p class="lead">Da Floresta Negra ao Mar de Wadden, dos Alpes ao Lago de Constança, a natureza alemã é variada e protegida por 16 parques nacionais. O país apostou na <i>Energiewende</i>, a transição energética: mais da metade da eletricidade já vem de fontes renováveis como vento e sol, com meta de neutralidade climática até 2045.</p>
-      <ul class="data"><li><b>FLORESTAS:</b> ~32% DO PAÍS</li><li><b>RENOVÁVEIS:</b> &gt; 50% DA ELETRICIDADE</li><li><b>META:</b> NEUTRALIDADE 2045</li><li><b>PARQUES:</b> 16</li></ul>
-      <p class="fact"><b>VOCÊ SABIA?</b> A Alemanha recicla cerca de dois terços dos resíduos urbanos, uma das maiores taxas do mundo.</p>
+      <p class="kicker rv" style="--d:0s"><span>ATO 10</span> / 11 — NATUREZA E ENERGIA</p>
+      <h2><span class="ln"><span style="--i:0">NATUREZA</span></span><em class="ln"><span style="--i:1">& energia</span></em></h2>
+      <p class="lead rv" style="--d:.35s">Da Floresta Negra ao Mar de Wadden, dos Alpes ao Lago de Constança, a natureza alemã é variada e protegida por 16 parques nacionais. O país apostou na <i>Energiewende</i>, a transição energética: mais da metade da eletricidade já vem de fontes renováveis como vento e sol, com meta de neutralidade climática até 2045.</p>
+      <ul class="data rv" style="--d:.5s"><li style="--k:0"><b>FLORESTAS:</b> ~32% DO PAÍS</li><li style="--k:1"><b>RENOVÁVEIS:</b> &gt; 50% DA ELETRICIDADE</li><li style="--k:2"><b>META:</b> NEUTRALIDADE 2045</li><li style="--k:3"><b>PARQUES:</b> 16</li></ul>
+      <p class="fact rv" style="--d:.9s"><b>VOCÊ SABIA?</b> A Alemanha recicla cerca de dois terços dos resíduos urbanos, uma das maiores taxas do mundo.</p>
     </div>
   </div>
 </section>
@@ -592,22 +679,47 @@ h1 em,h2 em{display:block;font-family:var(--serif);font-weight:400;font-style:it
   </div>
 </section>
 
+
+<section class="band" aria-hidden="true">
+  <div class="row a" id="b1"></div>
+  <div class="row b" id="b2"></div>
+</section>
+
+<section class="sec" id="laender" data-label="Os 16 estados" aria-label="Os 16 estados">
+  <div class="sint-head">
+    <p class="kicker"><span>ATO 11</span> / 11 — SÍNTESE: OS 16 ESTADOS</p>
+    <h2>OS 16 <em>Länder</em></h2>
+    <p class="lead">Passe o mouse (ou toque) em cada estado para virar o card e descobrir a capital e uma curiosidade.</p>
+  </div>
+  <div class="lander" id="lander"></div>
+</section>
+
+<section class="sec" id="gloss" data-label="Glossário" aria-label="Glossário de palavras alemãs">
+  <div class="sint-head">
+    <p class="kicker"><span>ATO 11</span> / 11 — SÍNTESE: PALAVRAS ALEMÃS</p>
+    <h2>PALAVRAS <em>sem tradução</em></h2>
+    <p class="lead">O alemão cria palavras compostas capazes de resumir sentimentos inteiros. Arraste ou use as setas.</p>
+  </div>
+  <div class="rail-ctl"><button id="rPrev" aria-label="Anterior">←</button><button id="rNext" aria-label="Próxima">→</button></div>
+  <div class="rail" id="rail"></div>
+</section>
+
 <section class="nums" id="numeros" aria-label="Alemanha em números">
   <div class="sint-head">
     <p class="kicker"><span>ATO 11</span> / 11 — SÍNTESE: EM NÚMEROS</p>
     <h2>EM <em>números</em></h2>
   </div>
   <div class="stats">
-    <div class="stat"><div class="big"><span data-count="84.5" data-dec="1">0</span><em>mi</em></div><div class="lab">habitantes</div></div>
-    <div class="stat"><div class="big"><span data-count="357588">0</span></div><div class="lab">km² de área</div></div>
-    <div class="stat"><div class="big"><span data-count="16">0</span></div><div class="lab">estados (Länder)</div></div>
-    <div class="stat"><div class="big"><span data-count="9">0</span></div><div class="lab">países vizinhos</div></div>
-    <div class="stat"><div class="big">+<span data-count="20000">0</span></div><div class="lab">castelos e palácios</div></div>
-    <div class="stat"><div class="big">+<span data-count="3000">0</span></div><div class="lab">tipos de pão</div></div>
-    <div class="stat"><div class="big">+<span data-count="1500">0</span></div><div class="lab">cervejarias</div></div>
-    <div class="stat"><div class="big">+<span data-count="110">0</span></div><div class="lab">prêmios Nobel</div></div>
+    <div class="stat rvs"><div class="big"><span data-count="84.5" data-dec="1">0</span><em>mi</em></div><div class="lab">habitantes</div></div>
+    <div class="stat rvs"><div class="big"><span data-count="357588">0</span></div><div class="lab">km² de área</div></div>
+    <div class="stat rvs"><div class="big"><span data-count="16">0</span></div><div class="lab">estados (Länder)</div></div>
+    <div class="stat rvs"><div class="big"><span data-count="9">0</span></div><div class="lab">países vizinhos</div></div>
+    <div class="stat rvs"><div class="big">+<span data-count="20000">0</span></div><div class="lab">castelos e palácios</div></div>
+    <div class="stat rvs"><div class="big">+<span data-count="3000">0</span></div><div class="lab">tipos de pão</div></div>
+    <div class="stat rvs"><div class="big">+<span data-count="1500">0</span></div><div class="lab">cervejarias</div></div>
+    <div class="stat rvs"><div class="big">+<span data-count="110">0</span></div><div class="lab">prêmios Nobel</div></div>
   </div>
-  <div class="bars" id="bars">
+  <div class="bars rvs" id="bars">
     <h3>MAIORES CIDADES · POPULAÇÃO (MILHÕES)</h3>
     <div class="bar"><span>Berlim</span><div class="track"><i data-w="100"></i></div><span class="v">~3,7</span></div>
     <div class="bar"><span>Hamburgo</span><div class="track"><i data-w="51"></i></div><span class="v">~1,9</span></div>
@@ -633,7 +745,7 @@ h1 em,h2 em{display:block;font-family:var(--serif);font-weight:400;font-style:it
   </button>
   <div class="card-d" id="card-d1"><div class="in">
     <p>Bundesrepublik Deutschland: república federal parlamentarista, capital Berlim, maior economia europeia.</p>
-    <ul class="data small"><li><b>CAPITAL:</b> BERLIM</li><li><b>POPULAÇÃO:</b> ~84,5 MI</li><li><b>MOEDA:</b> EURO (€)</li><li><b>IDIOMA:</b> ALEMÃO</li></ul>
+    <ul class="data small"><li style="--k:0"><b>CAPITAL:</b> BERLIM</li><li style="--k:1"><b>POPULAÇÃO:</b> ~84,5 MI</li><li style="--k:2"><b>MOEDA:</b> EURO (€)</li><li style="--k:3"><b>IDIOMA:</b> ALEMÃO</li></ul>
     <p class="mono prompt-l">PROMPT DA IMAGEM</p>
     <code>A minimalist 3D sculptural emblem of the German federal eagle and subtle black-red-gold ribbon floating in space, centered, 85mm lens, soft side light, isolated on solid dark matte background #0d0d0d, ultra detailed, studio photography</code>
   </div></div>
@@ -645,7 +757,7 @@ h1 em,h2 em{display:block;font-family:var(--serif);font-weight:400;font-style:it
   </button>
   <div class="card-d" id="card-d2"><div class="in">
     <p>Europa Central, 9 fronteiras, 16 estados; do Mar do Norte aos Alpes, com Reno, Elba e Danúbio.</p>
-    <ul class="data small"><li><b>COORD.:</b> 51°N 10°E</li><li><b>ÁREA:</b> 357.588 KM²</li><li><b>FRONTEIRAS:</b> 9</li><li><b>ESTADOS:</b> 16 (LÄNDER)</li></ul>
+    <ul class="data small"><li style="--k:0"><b>COORD.:</b> 51°N 10°E</li><li style="--k:1"><b>ÁREA:</b> 357.588 KM²</li><li style="--k:2"><b>FRONTEIRAS:</b> 9</li><li style="--k:3"><b>ESTADOS:</b> 16 (LÄNDER)</li></ul>
     <p class="mono prompt-l">PROMPT DA IMAGEM</p>
     <code>A finely detailed 3D topographic relief map of Germany showing the Alps in the south and the Rhine river, centered, 85mm lens, soft side light, isolated on solid dark matte background #0d0d0d, ultra detailed, studio photography</code>
   </div></div>
@@ -657,7 +769,7 @@ h1 em,h2 em{display:block;font-family:var(--serif);font-weight:400;font-style:it
   </button>
   <div class="card-d" id="card-d3"><div class="in">
     <p>16 estados, 3 cidades-estado; Berlim, Munique, Hamburgo, Colônia e Frankfurt.</p>
-    <ul class="data small"><li><b>ESTADOS:</b> 16</li><li><b>CIDADES-ESTADO:</b> 3</li><li><b>MAIOR CIDADE:</b> BERLIM ~3,7 MI</li></ul>
+    <ul class="data small"><li style="--k:0"><b>ESTADOS:</b> 16</li><li style="--k:1"><b>CIDADES-ESTADO:</b> 3</li><li style="--k:2"><b>MAIOR CIDADE:</b> BERLIM ~3,7 MI</li></ul>
     <p class="mono prompt-l">PROMPT DA IMAGEM</p>
     <code>A miniature sculptural skyline of German cities: Cologne Cathedral, Munich Frauenkirche, Berlin TV Tower and Frankfurt skyscrapers, centered, 85mm lens, soft side light, isolated on solid dark matte background #0d0d0d, ultra detailed, studio photography</code>
   </div></div>
@@ -669,7 +781,7 @@ h1 em,h2 em{display:block;font-family:var(--serif);font-weight:400;font-style:it
   </button>
   <div class="card-d" id="card-d4"><div class="in">
     <p>Tribos germânicas, Sacro Império, Reforma (1517), unificação (1871), Muro (1961–89), reunificação (1990).</p>
-    <ul class="data small"><li><b>1517:</b> REFORMA</li><li><b>1871:</b> UNIFICAÇÃO</li><li><b>1989:</b> QUEDA DO MURO</li><li><b>1990:</b> REUNIFICAÇÃO</li></ul>
+    <ul class="data small"><li style="--k:0"><b>1517:</b> REFORMA</li><li style="--k:1"><b>1871:</b> UNIFICAÇÃO</li><li style="--k:2"><b>1989:</b> QUEDA DO MURO</li><li style="--k:3"><b>1990:</b> REUNIFICAÇÃO</li></ul>
     <p class="mono prompt-l">PROMPT DA IMAGEM</p>
     <code>A symbolic architectural artifact merging a stone piece of the Berlin Wall with the classical columns of the Brandenburg Gate, centered, 85mm lens, soft side light, isolated on solid dark matte background #0d0d0d, ultra detailed, studio photography</code>
   </div></div>
@@ -681,7 +793,7 @@ h1 em,h2 em{display:block;font-family:var(--serif);font-weight:400;font-style:it
   </button>
   <div class="card-d" id="card-d5"><div class="in">
     <p>+3.000 pães, Brezel, Currywurst, Schnitzel, Spätzle, Floresta Negra e a Lei da Pureza de 1516.</p>
-    <ul class="data small"><li><b>PÃES:</b> +3.000 TIPOS</li><li><b>CERVEJARIAS:</b> +1.500</li><li><b>LEI DA PUREZA:</b> 1516</li></ul>
+    <ul class="data small"><li style="--k:0"><b>PÃES:</b> +3.000 TIPOS</li><li style="--k:1"><b>CERVEJARIAS:</b> +1.500</li><li style="--k:2"><b>LEI DA PUREZA:</b> 1516</li></ul>
     <p class="mono prompt-l">PROMPT DA IMAGEM</p>
     <code>An artisanal wooden board featuring a golden baked German pretzel, a traditional bratwurst, and a glass of wheat beer, centered, 85mm lens, soft side light, isolated on solid dark matte background #0d0d0d, ultra detailed, studio photography</code>
   </div></div>
@@ -693,7 +805,7 @@ h1 em,h2 em{display:block;font-family:var(--serif);font-weight:400;font-style:it
   </button>
   <div class="card-d" id="card-d6"><div class="in">
     <p>+20.000 castelos, Ruhetag, sistema Pfand, Oktoberfest e Mercados de Natal.</p>
-    <ul class="data small"><li><b>CASTELOS:</b> +20.000</li><li><b>UNESCO:</b> 52 PATRIMÔNIOS</li><li><b>RECICLAGEM:</b> SISTEMA PFAND</li></ul>
+    <ul class="data small"><li style="--k:0"><b>CASTELOS:</b> +20.000</li><li style="--k:1"><b>UNESCO:</b> 52 PATRIMÔNIOS</li><li style="--k:2"><b>RECICLAGEM:</b> SISTEMA PFAND</li></ul>
     <p class="mono prompt-l">PROMPT DA IMAGEM</p>
     <code>A detailed miniature architectural model of Neuschwanstein Castle surrounded by subtle mist, centered, 85mm lens, soft side light, isolated on solid dark matte background #0d0d0d, ultra detailed, studio photography</code>
   </div></div>
@@ -705,7 +817,7 @@ h1 em,h2 em{display:block;font-family:var(--serif);font-weight:400;font-style:it
   </button>
   <div class="card-d" id="card-d7"><div class="in">
     <p>Bach, Beethoven, Wagner; seleção tetracampeã mundial, Bundesliga e Olimpíadas de 1936 e 1972.</p>
-    <ul class="data small"><li><b>COPAS DO MUNDO:</b> 4 (1954 · 74 · 90 · 2014)</li><li><b>BUNDESLIGA:</b> 18 CLUBES</li><li><b>OLIMPÍADAS:</b> 1936 · 1972</li></ul>
+    <ul class="data small"><li style="--k:0"><b>COPAS DO MUNDO:</b> 4 (1954 · 74 · 90 · 2014)</li><li style="--k:1"><b>BUNDESLIGA:</b> 18 CLUBES</li><li style="--k:2"><b>OLIMPÍADAS:</b> 1936 · 1972</li></ul>
     <p class="mono prompt-l">PROMPT DA IMAGEM</p>
     <code>A handcrafted violin and a classic football resting together, symbolising German music and sport, centered, 85mm lens, soft side light, isolated on solid dark matte background #0d0d0d, ultra detailed, studio photography</code>
   </div></div>
@@ -717,7 +829,7 @@ h1 em,h2 em{display:block;font-family:var(--serif);font-weight:400;font-style:it
   </button>
   <div class="card-d" id="card-d8"><div class="in">
     <p>Kant, Goethe, Beethoven, Einstein; Gutenberg, Benz, raio-X e MP3.</p>
-    <ul class="data small"><li><b>NOBEL:</b> +110</li><li><b>1450:</b> IMPRENSA</li><li><b>1886:</b> AUTOMÓVEL</li><li><b>1895:</b> RAIO-X</li></ul>
+    <ul class="data small"><li style="--k:0"><b>NOBEL:</b> +110</li><li style="--k:1"><b>1450:</b> IMPRENSA</li><li style="--k:2"><b>1886:</b> AUTOMÓVEL</li><li style="--k:3"><b>1895:</b> RAIO-X</li></ul>
     <p class="mono prompt-l">PROMPT DA IMAGEM</p>
     <code>A precision-engineered metallic mechanical gear intertwined with a sleek modern wind turbine blade and antique printing press type, centered, 85mm lens, soft side light, isolated on solid dark matte background #0d0d0d, ultra detailed, studio photography</code>
   </div></div>
@@ -729,7 +841,7 @@ h1 em,h2 em{display:block;font-family:var(--serif);font-weight:400;font-style:it
   </button>
   <div class="card-d" id="card-d9"><div class="in">
     <p>Maior economia europeia, indústria automotiva, Mittelstand, Autobahn e ensino técnico dual.</p>
-    <ul class="data small"><li><b>PIB:</b> ~US$ 4,5 TRI</li><li><b>AUTOBAHN:</b> ~13.000 KM</li><li><b>MOTOR:</b> MITTELSTAND</li></ul>
+    <ul class="data small"><li style="--k:0"><b>PIB:</b> ~US$ 4,5 TRI</li><li style="--k:1"><b>AUTOBAHN:</b> ~13.000 KM</li><li style="--k:2"><b>MOTOR:</b> MITTELSTAND</li></ul>
     <p class="mono prompt-l">PROMPT DA IMAGEM</p>
     <code>A polished golden euro coin behind a sleek silver German automobile in profile, symbolising industry and economy, centered, 85mm lens, soft side light, isolated on solid dark matte background #0d0d0d, ultra detailed, studio photography</code>
   </div></div>
@@ -741,7 +853,7 @@ h1 em,h2 em{display:block;font-family:var(--serif);font-weight:400;font-style:it
   </button>
   <div class="card-d" id="card-d10"><div class="in">
     <p>Floresta Negra, 16 parques nacionais, Energiewende, mais de 50% de renováveis e meta de 2045.</p>
-    <ul class="data small"><li><b>FLORESTAS:</b> ~32% DO PAÍS</li><li><b>RENOVÁVEIS:</b> &gt; 50% DA ELETRICIDADE</li><li><b>META:</b> NEUTRALIDADE 2045</li><li><b>PARQUES:</b> 16</li></ul>
+    <ul class="data small"><li style="--k:0"><b>FLORESTAS:</b> ~32% DO PAÍS</li><li style="--k:1"><b>RENOVÁVEIS:</b> &gt; 50% DA ELETRICIDADE</li><li style="--k:2"><b>META:</b> NEUTRALIDADE 2045</li><li style="--k:3"><b>PARQUES:</b> 16</li></ul>
     <p class="mono prompt-l">PROMPT DA IMAGEM</p>
     <code>A diorama of Black Forest pine trees with modern wind turbines and a solar panel on a green hill, centered, 85mm lens, soft side light, isolated on solid dark matte background #0d0d0d, ultra detailed, studio photography</code>
   </div></div>
@@ -754,7 +866,7 @@ h1 em,h2 em{display:block;font-family:var(--serif);font-weight:400;font-style:it
     <p class="kicker"><span>BÔNUS</span> — TESTE O QUE VOCÊ APRENDEU</p>
     <h2>QUIZ <em>final</em></h2>
   </div>
-  <div class="qz" id="qz"></div>
+  <div class="qz rvs" id="qz"></div>
   <div class="foot"><span>DEUTSCHLAND · 11 ATOS · 10 FRAMES</span><a href="#ato1">↑ VOLTAR AO INÍCIO</a></div>
 </section>
 </main>
@@ -799,10 +911,10 @@ h1 em,h2 em{display:block;font-family:var(--serif);font-weight:400;font-style:it
   /* ---------- navegação ---------- */
   const navTargets=()=>{
     const vh=innerHeight;
-    return [...acts.map(a=>a.offsetTop+0.45*(a.offsetHeight-vh)), tl.offsetTop,
+    return [...acts.map(a=>a.offsetTop+0.45*(a.offsetHeight-vh)), tl.offsetTop,document.getElementById('laender').offsetTop,document.getElementById('gloss').offsetTop,
       document.getElementById('numeros').offsetTop, document.getElementById('sintese').offsetTop, document.getElementById('quiz').offsetTop];
   };
-  const navLabels=[...LABELS,'Linha do tempo','Em números','Cards de revisão','Quiz'];
+  const navLabels=[...LABELS,'Linha do tempo','Os 16 estados','Palavras alemãs','Em números','Cards de revisão','Quiz'];
   const dots=document.getElementById('dots');
   dots.innerHTML=navLabels.map((l,i)=>`<button aria-label="${l}"><span>${String(i+1).padStart(2,'0')} · ${l}</span></button>`).join('');
   const dotEls=[...dots.children];
@@ -834,15 +946,16 @@ h1 em,h2 em{display:block;font-family:var(--serif);font-weight:400;font-style:it
       f.style.visibility=o>0.001?'visible':'hidden';
       if(!reduce){
         const p=ps[i];
-        f.firstElementChild.style.transform=`rotateY(${((p-.5)*18).toFixed(2)}deg) rotateX(${((.5-p)*4).toFixed(2)}deg) scale(${(0.96+p*0.07).toFixed(3)})`;
+        const sv=f.firstElementChild.style;sv.setProperty('--ry',((p-.5)*18).toFixed(2)+'deg');sv.setProperty('--rx',((.5-p)*4).toFixed(2)+'deg');sv.setProperty('--sc',(0.96+p*0.07).toFixed(3));
       }
       if(o>bestO){bestO=o;best=i}
       const p=ps[i];
       const ci=(i===0?1:smooth(p/0.12))*(1-smooth((p-0.9)/0.1));
       copies[i].style.opacity=ci.toFixed(3);
-      copies[i].style.transform=`translateY(${((1-ci)*14).toFixed(1)}px)`;
+      copies[i].classList.toggle('in',!!window.GER_READY&&p<0.94&&(i===0||p>0.03));
     });
     if(best!==lastGlow){stage.style.setProperty('--glow',GLOWS[best]);lastGlow=best}
+    if(window.GER&&GER.frame)GER.frame({best:best,ps:ps,bestO:bestO});
 
     const h=document.documentElement.scrollHeight-vh;
     fill.style.transform=`scaleY(${h>0?clamp(scrollY/h).toFixed(4):0})`;
@@ -871,7 +984,7 @@ h1 em,h2 em{display:block;font-family:var(--serif);font-weight:400;font-style:it
   update();
 
   /* ---------- cards ---------- */
-  document.querySelectorAll('.card').forEach(c=>{
+  document.querySelectorAll('.card').forEach((c,ci)=>{c.classList.add('rvs');c.style.setProperty('--i',ci%5);
     const b=c.querySelector('.card-btn');
     b.addEventListener('click',()=>{const open=c.classList.toggle('open');b.setAttribute('aria-expanded',open)});
   });
@@ -920,6 +1033,133 @@ h1 em,h2 em{display:block;font-family:var(--serif);font-weight:400;font-style:it
     });
   }
   renderQ();
+})();
+</script>
+
+<script>
+(function(){
+  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const ACCENTS=["#e2412f", "#5db7e8", "#6fa0d8", "#e0866a", "#f2c16b", "#8ea6d6", "#e8a24a", "#c4ccd4", "#f0c24a", "#6fc27f"], LABELS=["Panorama Geral", "Localização e Geografia", "Cidades e Estados", "História Completa", "Culinária e Pratos Típicos", "Cultura, Castelos e Curiosidades", "Música e Esportes", "Pensadores, Ciência e Engenharia", "Economia e Indústria", "Natureza e Energia"];
+  const clamp=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+  const root=document.documentElement;
+  const GER=window.GER={};
+
+  /* ----- intro ----- */
+  const iw=document.getElementById('introWord');
+  'DEUTSCHLAND'.split('').forEach((c,i)=>{const s=document.createElement('span');s.textContent=c;s.style.setProperty('--i',i);iw.appendChild(s)});
+  const start=()=>{root.classList.add('ready');window.GER_READY=true;window.dispatchEvent(new Event('scroll'))};
+  setTimeout(start,reduce?200:2100);
+  const cue=document.getElementById('cue');
+
+  /* ----- ghost number, orbit, accent, head, ring ----- */
+  const orbit=document.getElementById('orbit'), orbText=document.getElementById('orbText');
+  const head=document.getElementById('head'), ring=document.getElementById('ringFg');
+  const stage=document.getElementById('stage');
+  let lastAct=-1;
+  GER.frame=function(s){
+    const best=s.best, y=scrollY, H=Math.max(1,root.scrollHeight-innerHeight), prog=clamp(y/H);
+    if(best!==lastAct){
+      lastAct=best;
+      document.getElementById('ghostN').textContent=String(best+1).padStart(2,'0');
+      const old=document.getElementById('ghostN');const clone=old.cloneNode(true);old.parentNode.replaceChild(clone,old);
+      const lab=(LABELS[best]||'').toUpperCase();
+      orbText.textContent=(' ◆ '+lab+' ◆ DEUTSCHLAND ◆ '+lab+' ').repeat(1);
+      root.style.setProperty('--accent',ACCENTS[best]);
+    }
+    const g=document.getElementById('ghostN'); if(g&&!reduce)g.style.transform='translateX('+((s.ps[best]-.5)*-9).toFixed(2)+'vw)';
+    if(!reduce)orbit.style.setProperty('--rot',(y*0.05).toFixed(2)+'deg');
+    head.style.top=(prog*100).toFixed(3)+'%';
+    ring.setAttribute('stroke-dashoffset',(94.25*(1-prog)).toFixed(2));
+    cue.classList.toggle('hide',y>60);
+    const vis=Math.min(1,s.bestO).toFixed(3);orbit.style.opacity=vis;document.getElementById('ghost').style.opacity=vis;
+  };
+
+  /* ----- parallax do mouse ----- */
+  if(!reduce&&matchMedia('(hover:hover)').matches){
+    let tx=0,ty=0,cx=0,cy=0;
+    addEventListener('pointermove',e=>{tx=e.clientX/innerWidth*2-1;ty=e.clientY/innerHeight*2-1},{passive:true});
+    (function loop(){cx+=(tx-cx)*.07;cy+=(ty-cy)*.07;stage.style.setProperty('--mx',cx.toFixed(3));stage.style.setProperty('--my',cy.toFixed(3));requestAnimationFrame(loop)})();
+  }
+
+  /* ----- partículas ----- */
+  const cv=document.getElementById('fx'), cx2=cv.getContext('2d');
+  let W,Hh,dpr=Math.min(2,devicePixelRatio||1),P=[];
+  const cols=['226,65,47','232,185,60','241,236,226'];
+  function size(){W=innerWidth;Hh=innerHeight;cv.width=W*dpr;cv.height=Hh*dpr;cv.style.width=W+'px';cv.style.height=Hh+'px';cx2.setTransform(dpr,0,0,dpr,0,0)}
+  size();addEventListener('resize',size);
+  const N=innerWidth<768?28:60;
+  for(let i=0;i<N;i++)P.push({x:Math.random(),y:Math.random(),r:Math.random()*1.6+.4,v:Math.random()*.00008+.00002,z:Math.random()*.8+.2,c:cols[i%3],a:Math.random()*.5+.15,ph:Math.random()*6.28});
+  let lastY=scrollY;
+  function draw(t){
+    cx2.clearRect(0,0,W,Hh);
+    const dy=(scrollY-lastY);lastY=scrollY;
+    P.forEach(p=>{
+      p.y-=p.v*16*(1+p.z); p.y-=dy/Hh*.25*p.z;
+      if(p.y<-.05)p.y=1.05; if(p.y>1.05)p.y=-.05;
+      const x=(p.x+Math.sin(t/4000+p.ph)*.012)*W, y=p.y*Hh;
+      cx2.beginPath();cx2.arc(x,y,p.r*p.z+.3,0,6.283);cx2.fillStyle='rgba('+p.c+','+(p.a*(.6+.4*Math.sin(t/900+p.ph))).toFixed(3)+')';cx2.fill();
+    });
+    if(!document.hidden)requestAnimationFrame(draw);
+  }
+  if(!reduce)requestAnimationFrame(draw);
+  document.addEventListener('visibilitychange',()=>{if(!document.hidden&&!reduce)requestAnimationFrame(draw)});
+
+  /* ----- faixas (marquee por scroll) ----- */
+  const b1=document.getElementById('b1'), b2=document.getElementById('b2'), band=document.querySelector('.band');
+  const w1='Heimat ✦ Fernweh ✦ Gemütlichkeit ✦ Feierabend ✦ Zeitgeist ✦ ', w2='Deutschland ★ Alemanha ★ Berlin ★ Rhein ★ Alpen ★ ';
+  b1.innerHTML=Array(5).fill('<span>'+w1+'</span>').join('');
+  b2.innerHTML=Array(5).fill('<span>'+w2+'</span>').join('');
+  function bandMove(){const r=band.getBoundingClientRect();const k=(innerHeight-r.top);b1.style.transform='translateX('+(-k*.45).toFixed(1)+'px)';b2.style.transform='translateX('+(-1500+k*.45).toFixed(1)+'px)'}
+  addEventListener('scroll',bandMove,{passive:true});bandMove();
+
+  /* ----- estados ----- */
+  const L=[
+   ['BW','Baden-Württemberg','Stuttgart','Floresta Negra e berço de Mercedes-Benz e Porsche.'],
+   ['BY','Baviera','Munique','Maior estado em área: Alpes, Oktoberfest e Neuschwanstein.'],
+   ['BE','Berlim','Berlim','Capital e cidade-estado, símbolo da reunificação.'],
+   ['BB','Brandemburgo','Potsdam','Abriga o palácio de Sanssouci, de Frederico, o Grande.'],
+   ['HB','Bremen','Bremen','Menor estado do país; cidade-estado portuária.'],
+   ['HH','Hamburgo','Hamburgo','Cidade-estado com o maior porto da Alemanha.'],
+   ['HE','Hessen','Wiesbaden','Inclui Frankfurt, centro financeiro e sede do BCE.'],
+   ['MV','Mecklemburgo-Pomerânia Ocidental','Schwerin','Costa do Báltico e milhares de lagos.'],
+   ['NI','Baixa Saxônia','Hanôver','Segundo maior estado em área; sede da Volkswagen, em Wolfsburg.'],
+   ['NW','Renânia do Norte-Vestfália','Düsseldorf','Estado mais populoso: Colônia e o vale do Ruhr.'],
+   ['RP','Renânia-Palatinado','Mainz','Vales do Reno e do Mosela, terra de vinhos; cidade de Gutenberg.'],
+   ['SL','Sarre','Saarbrücken','Menor estado entre os de território (fora as cidades-estado).'],
+   ['SN','Saxônia','Dresden','Dresden e Leipzig: arte, música e cultura.'],
+   ['ST','Saxônia-Anhalt','Magdeburgo','Wittenberg, onde começou a Reforma de Lutero.'],
+   ['SH','Schleswig-Holstein','Kiel','Entre o Mar do Norte e o Báltico.'],
+   ['TH','Turíngia','Erfurt','&ldquo;Coração verde&rdquo; do país; castelo de Wartburg.']
+  ];
+  document.getElementById('lander').innerHTML=L.map((s,i)=>'<div class="fl rvs" style="--i:'+(i%4)+'"><button aria-label="'+s[1]+': capital '+s[2]+'"><span class="f"><span class="abbr">'+s[0]+'</span><span class="nm">'+s[1]+'</span></span><span class="bk"><span class="cap">Capital · '+s[2]+'</span><span class="tx">'+s[3]+'</span></span></button></div>').join('');
+  document.querySelectorAll('.fl button').forEach(b=>b.addEventListener('click',()=>b.parentNode.classList.toggle('on')));
+
+  /* ----- glossário ----- */
+  const G=[
+   ['Fernweh','FÉR-vê','Saudade de lugares distantes, vontade de ir longe.'],
+   ['Gemütlichkeit','guê-MÜT-lich-kait','Aconchego: o conforto acolhedor de estar bem com os seus.'],
+   ['Feierabend','FAI-a-ra-bent','O fim do expediente, o início do descanso merecido.'],
+   ['Schadenfreude','XA-den-froi-de','Prazer com o infortúnio alheio.'],
+   ['Zeitgeist','TSAIT-gaist','O espírito de uma época.'],
+   ['Fingerspitzengefühl','FIN-ger-spit-sen-gue-fül','Tato apurado, sensibilidade para lidar com situações delicadas.'],
+   ['Kindergarten','KIN-der-gar-ten','&ldquo;Jardim das crianças&rdquo;: ideia alemã do século XIX que virou palavra no mundo todo.'],
+   ['Wanderlust','VAN-der-lust','Prazer em caminhar e explorar a natureza.'],
+   ['Torschlusspanik','TÔR-xluss-pa-nik','O medo de que as oportunidades estejam se fechando com o tempo.']
+  ];
+  const rail=document.getElementById('rail');
+  rail.innerHTML=G.map((g,i)=>'<article class="gw rvs" style="--i:'+(i%4)+'"><span class="pr">/ '+g[1]+' /</span><div><div class="w">'+g[0]+'</div><p class="m">'+g[2]+'</p></div></article>').join('');
+  const step=()=>rail.querySelector('.gw').offsetWidth+16;
+  document.getElementById('rPrev').onclick=()=>rail.scrollBy({left:-step(),behavior:'smooth'});
+  document.getElementById('rNext').onclick=()=>rail.scrollBy({left:step(),behavior:'smooth'});
+  let dn=false,sx=0,sl=0;
+  rail.addEventListener('pointerdown',e=>{if(e.pointerType!=='mouse')return;dn=true;sx=e.clientX;sl=rail.scrollLeft;rail.style.scrollSnapType='none';rail.style.cursor='grabbing'});
+  addEventListener('pointerup',()=>{if(!dn)return;dn=false;rail.style.scrollSnapType='';rail.style.cursor=''});
+  addEventListener('pointermove',e=>{if(dn)rail.scrollLeft=sl-(e.clientX-sx)});
+
+  /* ----- reveal ao rolar ----- */
+  const io2=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){en.target.classList.add('vis');io2.unobserve(en.target)}}),{threshold:.15});
+  document.querySelectorAll('.rvs').forEach(el=>io2.observe(el));
+  window.dispatchEvent(new Event('scroll'));
 })();
 </script>
 </body>
