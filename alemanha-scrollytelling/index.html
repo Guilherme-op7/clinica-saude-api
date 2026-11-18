@@ -1,0 +1,506 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Alemanha — Jornada em 7 atos</title>
+<meta name="description" content="Scrollytelling sobre a Alemanha: geografia, história, culinária, cultura e ciência.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;800;900&family=JetBrains+Mono:wght@400;600&family=Playfair+Display:ital,wght@1,400;1,500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0d0d0d; --ink:#f1ece2; --mute:#9d978b; --red:#e2412f; --gold:#e8b93c;
+  --sans:"Archivo","Helvetica Neue",Arial,system-ui,sans-serif;
+  --serif:"Playfair Display",Georgia,"Times New Roman",serif;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --fig:min(44vh,28vw,430px);
+  --line:4px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--bg);scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+svg{display:block}
+
+/* HUD */
+.hud{position:fixed;inset:0 0 auto 0;z-index:20;display:flex;justify-content:space-between;align-items:center;padding:18px clamp(16px,4vw,48px);font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);pointer-events:none}
+.hud b{color:var(--ink);font-weight:600}
+.hud .brand{display:flex;gap:10px;align-items:center}
+.hud .flag{display:inline-flex;width:22px;height:14px;flex-direction:column;border-radius:2px;overflow:hidden}
+.hud .flag i{flex:1}.hud .flag i:nth-child(1){background:#000;outline:1px solid #333}.hud .flag i:nth-child(2){background:#dd0000}.hud .flag i:nth-child(3){background:#ffce00}
+
+/* fio condutor */
+#line{position:fixed;left:50%;top:0;bottom:0;width:var(--line);margin-left:calc(var(--line)/-2);z-index:1;background:rgba(255,255,255,.05);pointer-events:none}
+#line .fill{position:absolute;inset:0;transform-origin:top;transform:scaleY(0);background:linear-gradient(to bottom,#1c1c1c 0%,#8a1f16 22%,var(--red) 48%,#e08a2a 72%,var(--gold) 100%);box-shadow:0 0 18px rgba(226,65,47,.35);will-change:transform}
+
+/* palco das figuras */
+#stage{position:fixed;inset:0;z-index:2;pointer-events:none;perspective:1000px}
+#stage::before{content:"";position:absolute;left:50%;top:50%;width:calc(var(--fig)*2);height:calc(var(--fig)*2);transform:translate(-50%,-50%);background:radial-gradient(closest-side,rgba(255,236,200,.10),transparent 70%)}
+.fig{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);width:var(--fig);height:var(--fig);opacity:0;will-change:opacity}
+.fig svg{width:100%;height:100%;overflow:visible;will-change:transform;filter:drop-shadow(-8px 0 24px rgba(255,238,210,.05))}
+
+/* atos */
+.act{position:relative;height:230vh;z-index:3}
+.sticky{position:sticky;top:0;height:100vh;display:flex;align-items:center;padding:0 clamp(20px,5vw,72px)}
+.copy{width:min(30vw,430px);will-change:opacity,transform}
+.copy.left{margin-right:auto}.copy.right{margin-left:auto}
+.kicker{font-family:var(--mono);font-size:11px;letter-spacing:.16em;color:var(--mute);margin-bottom:18px}
+.kicker span{color:var(--gold)}
+h1,h2{font-family:var(--sans);font-weight:900;text-transform:uppercase;line-height:.95;letter-spacing:-.02em;font-size:clamp(2rem,3.9vw,3.6rem);margin-bottom:20px}
+h1 em,h2 em{display:block;font-family:var(--serif);font-weight:400;font-style:italic;text-transform:none;letter-spacing:0;color:var(--red);font-size:.86em;line-height:1.05;margin-top:2px}
+.lead{font-size:clamp(.9rem,1.05vw,1.02rem);line-height:1.65;color:#d6d0c4;margin-bottom:22px}
+.lead i{color:var(--ink)}
+.data{list-style:none;font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--mute);display:flex;flex-wrap:wrap;gap:8px 16px;padding-top:16px;border-top:1px solid rgba(255,255,255,.14)}
+.data b{color:var(--gold);font-weight:600}
+.data li{white-space:nowrap}
+
+/* síntese */
+#sintese{position:relative;z-index:4;background:linear-gradient(to bottom,transparent,var(--bg) 14vh);padding:22vh clamp(20px,5vw,72px) 16vh}
+.sint-head{max-width:880px;margin:0 auto 56px;text-align:center}
+.sint-head .lead{margin:0 auto}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:1180px;margin:0 auto}
+.card{background:#141414;border:1px solid rgba(255,255,255,.09);border-radius:20px;overflow:hidden;transition:border-color .25s,transform .25s}
+.card:hover{border-color:rgba(232,185,60,.5);transform:translateY(-3px)}
+.card-btn{all:unset;display:block;width:100%;cursor:pointer}
+.card-btn:focus-visible{outline:2px solid var(--gold);outline-offset:-2px;border-radius:20px}
+.thumb{display:block;aspect-ratio:1;background:radial-gradient(circle at 30% 25%,#232323,var(--bg) 75%);padding:12%}
+.thumb svg{width:100%;height:100%}
+.card-meta{display:grid;grid-template-columns:1fr auto;gap:4px 12px;padding:16px 18px 18px;align-items:center}
+.card-meta .mono{grid-column:1/-1;font-family:var(--mono);font-size:10px;letter-spacing:.16em;color:var(--gold)}
+.card-meta strong{font-weight:800;font-size:1rem;text-transform:uppercase;letter-spacing:-.01em}
+.plus{font-family:var(--mono);font-size:1.3rem;color:var(--red);transition:transform .25s}
+.card.open .plus{transform:rotate(45deg)}
+.card-d{display:grid;grid-template-rows:0fr;transition:grid-template-rows .35s ease}
+.card.open .card-d{grid-template-rows:1fr}
+.card-d>.in{overflow:hidden;min-height:0}
+.card-d{padding:0 18px}
+.card.open .card-d{padding:0 18px 18px}
+.card-d p{font-size:.9rem;line-height:1.55;color:#cfc9bd}
+.card-d .data.small{margin-top:12px;padding-top:12px;font-size:10px}
+.prompt-l{font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:var(--mute);margin-top:14px}
+.card-d code{display:block;font-family:var(--mono);font-size:10.5px;line-height:1.5;color:#a9a396;margin-top:6px}
+.foot{max-width:1180px;margin:56px auto 0;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--mute)}
+.foot a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--red)}
+
+/* mobile */
+@media (max-width:899px){
+  :root{--fig:min(62vw,36vh)}
+  .fig{top:33%}
+  #stage::before{top:33%}
+  .sticky{align-items:flex-end;padding:0 16px 5vh}
+  .copy,.copy.left,.copy.right{width:100%;margin:0;background:rgba(13,13,13,.88);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:18px 18px 16px}
+  h1,h2{font-size:clamp(1.5rem,7vw,2rem);margin-bottom:10px}
+  .kicker{margin-bottom:10px}
+  .lead{font-size:.82rem;line-height:1.5;margin-bottom:12px}
+  .data{padding-top:10px;gap:4px 12px;font-size:10px}
+  .grid{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:768px){
+  :root{--line:2px}
+  .hud span.hide-m{display:none}
+}
+@media (max-width:520px){
+  .grid{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.card,.plus,.card-d{transition:none}}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+<defs>
+ <linearGradient id="gGold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff1b8"/><stop offset=".45" stop-color="#e8b93c"/><stop offset="1" stop-color="#7d5810"/></linearGradient>
+ <linearGradient id="gSteel" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#f4f7f9"/><stop offset=".35" stop-color="#aab3bb"/><stop offset="1" stop-color="#30353a"/></linearGradient>
+ <linearGradient id="gSteelV" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e9edf0"/><stop offset=".5" stop-color="#8b949c"/><stop offset="1" stop-color="#2d3237"/></linearGradient>
+ <linearGradient id="gStone" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#eee9de"/><stop offset=".4" stop-color="#b3ad9f"/><stop offset="1" stop-color="#4a4740"/></linearGradient>
+ <linearGradient id="gConc" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#c9c6bf"/><stop offset=".5" stop-color="#8c8981"/><stop offset="1" stop-color="#3f3d39"/></linearGradient>
+ <linearGradient id="gWood" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#c8935a"/><stop offset=".5" stop-color="#8a5a2c"/><stop offset="1" stop-color="#4b2c13"/></linearGradient>
+ <linearGradient id="gWoodSide" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5b3818"/><stop offset="1" stop-color="#2a170a"/></linearGradient>
+ <linearGradient id="gBrez" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f0b45e"/><stop offset=".5" stop-color="#b8691f"/><stop offset="1" stop-color="#6a3410"/></linearGradient>
+ <linearGradient id="gWurst" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e3a36a"/><stop offset=".5" stop-color="#b2602e"/><stop offset="1" stop-color="#6a2d12"/></linearGradient>
+ <linearGradient id="gBeer" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ffd978"/><stop offset=".5" stop-color="#f0a21b"/><stop offset="1" stop-color="#a65a05"/></linearGradient>
+ <linearGradient id="gGlass" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff" stop-opacity=".55"/><stop offset=".25" stop-color="#fff" stop-opacity=".05"/><stop offset="1" stop-color="#fff" stop-opacity=".15"/></linearGradient>
+ <linearGradient id="gRock" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#9aa3a9"/><stop offset="1" stop-color="#2c3236"/></linearGradient>
+ <linearGradient id="gCastle" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fffdf7"/><stop offset=".5" stop-color="#d9d6cb"/><stop offset="1" stop-color="#6c6a66"/></linearGradient>
+ <linearGradient id="gRoof" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#9fb4cf"/><stop offset=".5" stop-color="#5d7494"/><stop offset="1" stop-color="#232f40"/></linearGradient>
+ <linearGradient id="gHill" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5a6760"/><stop offset="1" stop-color="#171c1a"/></linearGradient>
+ <radialGradient id="gDisc" cx=".3" cy=".25" r=".95"><stop offset="0" stop-color="#2d2d2d"/><stop offset=".6" stop-color="#141414"/><stop offset="1" stop-color="#0a0a0a"/></radialGradient>
+ <radialGradient id="shadow"><stop offset="0" stop-color="#000" stop-opacity=".85"/><stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient>
+ <linearGradient id="gRhine" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#bfeaff"/><stop offset="1" stop-color="#3aa0d8"/></linearGradient>
+ <filter id="blur6"><feGaussianBlur stdDeviation="6"/></filter>
+ <filter id="blur3"><feGaussianBlur stdDeviation="3"/></filter>
+ <g id="wing"><g transform="translate(192,150) rotate(258)"><path d="M0,-8 Q36.3,-17 66,-3 Q36.3,9 0,8Z" fill="url(#gGold)" stroke="#5a3f0c" stroke-width="1.2"/><path d="M6,0 L56,-3" stroke="#fff3c4" stroke-opacity=".4" stroke-width="1.2"/></g><g transform="translate(192,150) rotate(242)"><path d="M0,-8 Q47.3,-17 86,-3 Q47.3,9 0,8Z" fill="url(#gGold)" stroke="#5a3f0c" stroke-width="1.2"/><path d="M6,0 L76,-3" stroke="#fff3c4" stroke-opacity=".4" stroke-width="1.2"/></g><g transform="translate(192,150) rotate(226)"><path d="M0,-8 Q57.2,-17 104,-3 Q57.2,9 0,8Z" fill="url(#gGold)" stroke="#5a3f0c" stroke-width="1.2"/><path d="M6,0 L94,-3" stroke="#fff3c4" stroke-opacity=".4" stroke-width="1.2"/></g><g transform="translate(192,150) rotate(210)"><path d="M0,-8 Q63.8,-17 116,-3 Q63.8,9 0,8Z" fill="url(#gGold)" stroke="#5a3f0c" stroke-width="1.2"/><path d="M6,0 L106,-3" stroke="#fff3c4" stroke-opacity=".4" stroke-width="1.2"/></g><g transform="translate(192,150) rotate(194)"><path d="M0,-8 Q67.1,-17 122,-3 Q67.1,9 0,8Z" fill="url(#gGold)" stroke="#5a3f0c" stroke-width="1.2"/><path d="M6,0 L112,-3" stroke="#fff3c4" stroke-opacity=".4" stroke-width="1.2"/></g><g transform="translate(192,150) rotate(178)"><path d="M0,-8 Q66.0,-17 120,-3 Q66.0,9 0,8Z" fill="url(#gGold)" stroke="#5a3f0c" stroke-width="1.2"/><path d="M6,0 L110,-3" stroke="#fff3c4" stroke-opacity=".4" stroke-width="1.2"/></g><g transform="translate(192,150) rotate(162)"><path d="M0,-8 Q59.4,-17 108,-3 Q59.4,9 0,8Z" fill="url(#gGold)" stroke="#5a3f0c" stroke-width="1.2"/><path d="M6,0 L98,-3" stroke="#fff3c4" stroke-opacity=".4" stroke-width="1.2"/></g><g transform="translate(192,150) rotate(146)"><path d="M0,-8 Q49.5,-17 90,-3 Q49.5,9 0,8Z" fill="url(#gGold)" stroke="#5a3f0c" stroke-width="1.2"/><path d="M6,0 L80,-3" stroke="#fff3c4" stroke-opacity=".4" stroke-width="1.2"/></g></g>
+</defs>
+
+<!-- 1 · Águia federal + fita -->
+<symbol id="s1" viewBox="0 0 400 400">
+ <ellipse cx="200" cy="378" rx="130" ry="12" fill="url(#shadow)"/>
+ <circle cx="200" cy="190" r="150" fill="url(#gDisc)" stroke="url(#gGold)" stroke-width="5"/>
+ <circle cx="200" cy="190" r="136" fill="none" stroke="#fff" stroke-opacity=".08"/>
+ <use href="#wing"/><use href="#wing" transform="translate(400,0) scale(-1,1)"/>
+ <path d="M200,120 C214,132 222,160 216,200 C212,226 207,240 200,248 C193,240 188,226 184,200 C178,160 186,132 200,120Z" fill="url(#gGold)" stroke="#5a3f0c" stroke-width="1.4"/>
+ <g fill="url(#gGold)" stroke="#5a3f0c" stroke-width="1.2">
+  <ellipse cx="200" cy="270" rx="11" ry="34" transform="rotate(-18 200 240)"/>
+  <ellipse cx="200" cy="274" rx="11" ry="38"/>
+  <ellipse cx="200" cy="270" rx="11" ry="34" transform="rotate(18 200 240)"/>
+ </g>
+ <circle cx="200" cy="112" r="15" fill="url(#gGold)" stroke="#5a3f0c" stroke-width="1.2"/>
+ <polygon points="190,107 171,118 190,124" fill="#d83a1f" stroke="#5a1408" stroke-width="1"/>
+ <circle cx="198" cy="109" r="2.2" fill="#111"/>
+ <path d="M40,292 C120,256 180,328 250,292 S340,260 362,278" fill="none" stroke="#4a4a4a" stroke-width="23"/><path d="M40,292 C120,256 180,328 250,292 S340,260 362,278" fill="none" stroke="#161616" stroke-width="20"/><path d="M40,292 C120,256 180,328 250,292 S340,260 362,278" fill="none" stroke="#fff" stroke-opacity=".12" stroke-width="6" transform="translate(0,-6)"/><path d="M40,313 C120,277 180,349 250,313 S340,281 362,299" fill="none" stroke="#d8281c" stroke-width="20"/><path d="M40,313 C120,277 180,349 250,313 S340,281 362,299" fill="none" stroke="#fff" stroke-opacity=".12" stroke-width="6" transform="translate(0,-6)"/><path d="M40,334 C120,298 180,370 250,334 S340,302 362,320" fill="none" stroke="#f0b92a" stroke-width="20"/><path d="M40,334 C120,298 180,370 250,334 S340,302 362,320" fill="none" stroke="#fff" stroke-opacity=".12" stroke-width="6" transform="translate(0,-6)"/>
+</symbol>
+
+<!-- 2 · Relevo topográfico -->
+<symbol id="s2" viewBox="0 0 400 400">
+ <ellipse cx="200" cy="372" rx="150" ry="13" fill="url(#shadow)"/>
+ <polygon points="126.0,34.0 165.6,40.0 183.6,42.0 219.6,58.0 219.6,74.0 241.2,74.0 262.8,66.0 295.2,58.0 316.8,50.0 338.4,78.0 352.8,110.0 356.4,134.0 363.6,158.0 356.4,194.0 342.0,198.0 291.6,218.0 266.4,222.0 295.2,246.0 277.2,254.0 324.0,282.0 295.2,318.0 295.2,334.0 266.4,326.0 219.6,334.0 194.4,342.0 176.4,330.0 136.8,326.0 100.8,330.0 100.8,294.0 122.4,274.0 79.2,270.0 57.6,254.0 46.8,230.0 43.2,206.0 46.8,194.0 43.2,162.0 79.2,146.0 82.8,114.0 86.4,102.0 115.2,90.0 133.2,94.0 136.8,74.0 144.0,62.0 136.8,38.0" transform="translate(0,16)" fill="#1b1814"/><polygon points="126.0,34.0 165.6,40.0 183.6,42.0 219.6,58.0 219.6,74.0 241.2,74.0 262.8,66.0 295.2,58.0 316.8,50.0 338.4,78.0 352.8,110.0 356.4,134.0 363.6,158.0 356.4,194.0 342.0,198.0 291.6,218.0 266.4,222.0 295.2,246.0 277.2,254.0 324.0,282.0 295.2,318.0 295.2,334.0 266.4,326.0 219.6,334.0 194.4,342.0 176.4,330.0 136.8,326.0 100.8,330.0 100.8,294.0 122.4,274.0 79.2,270.0 57.6,254.0 46.8,230.0 43.2,206.0 46.8,194.0 43.2,162.0 79.2,146.0 82.8,114.0 86.4,102.0 115.2,90.0 133.2,94.0 136.8,74.0 144.0,62.0 136.8,38.0" transform="translate(205,322) scale(1.00) translate(-205,-322)" fill="#2b2822" stroke="#fff" stroke-opacity=".22" stroke-width="1.2"/><polygon points="126.0,34.0 165.6,40.0 183.6,42.0 219.6,58.0 219.6,74.0 241.2,74.0 262.8,66.0 295.2,58.0 316.8,50.0 338.4,78.0 352.8,110.0 356.4,134.0 363.6,158.0 356.4,194.0 342.0,198.0 291.6,218.0 266.4,222.0 295.2,246.0 277.2,254.0 324.0,282.0 295.2,318.0 295.2,334.0 266.4,326.0 219.6,334.0 194.4,342.0 176.4,330.0 136.8,326.0 100.8,330.0 100.8,294.0 122.4,274.0 79.2,270.0 57.6,254.0 46.8,230.0 43.2,206.0 46.8,194.0 43.2,162.0 79.2,146.0 82.8,114.0 86.4,102.0 115.2,90.0 133.2,94.0 136.8,74.0 144.0,62.0 136.8,38.0" transform="translate(205,319) scale(0.87) translate(-205,-322)" fill="#3a362d" stroke="#fff" stroke-opacity=".22" stroke-width="1.2"/><polygon points="126.0,34.0 165.6,40.0 183.6,42.0 219.6,58.0 219.6,74.0 241.2,74.0 262.8,66.0 295.2,58.0 316.8,50.0 338.4,78.0 352.8,110.0 356.4,134.0 363.6,158.0 356.4,194.0 342.0,198.0 291.6,218.0 266.4,222.0 295.2,246.0 277.2,254.0 324.0,282.0 295.2,318.0 295.2,334.0 266.4,326.0 219.6,334.0 194.4,342.0 176.4,330.0 136.8,326.0 100.8,330.0 100.8,294.0 122.4,274.0 79.2,270.0 57.6,254.0 46.8,230.0 43.2,206.0 46.8,194.0 43.2,162.0 79.2,146.0 82.8,114.0 86.4,102.0 115.2,90.0 133.2,94.0 136.8,74.0 144.0,62.0 136.8,38.0" transform="translate(205,316) scale(0.74) translate(-205,-322)" fill="#51493b" stroke="#fff" stroke-opacity=".22" stroke-width="1.2"/><polygon points="126.0,34.0 165.6,40.0 183.6,42.0 219.6,58.0 219.6,74.0 241.2,74.0 262.8,66.0 295.2,58.0 316.8,50.0 338.4,78.0 352.8,110.0 356.4,134.0 363.6,158.0 356.4,194.0 342.0,198.0 291.6,218.0 266.4,222.0 295.2,246.0 277.2,254.0 324.0,282.0 295.2,318.0 295.2,334.0 266.4,326.0 219.6,334.0 194.4,342.0 176.4,330.0 136.8,326.0 100.8,330.0 100.8,294.0 122.4,274.0 79.2,270.0 57.6,254.0 46.8,230.0 43.2,206.0 46.8,194.0 43.2,162.0 79.2,146.0 82.8,114.0 86.4,102.0 115.2,90.0 133.2,94.0 136.8,74.0 144.0,62.0 136.8,38.0" transform="translate(205,313) scale(0.61) translate(-205,-322)" fill="#6d6350" stroke="#fff" stroke-opacity=".22" stroke-width="1.2"/><polygon points="126.0,34.0 165.6,40.0 183.6,42.0 219.6,58.0 219.6,74.0 241.2,74.0 262.8,66.0 295.2,58.0 316.8,50.0 338.4,78.0 352.8,110.0 356.4,134.0 363.6,158.0 356.4,194.0 342.0,198.0 291.6,218.0 266.4,222.0 295.2,246.0 277.2,254.0 324.0,282.0 295.2,318.0 295.2,334.0 266.4,326.0 219.6,334.0 194.4,342.0 176.4,330.0 136.8,326.0 100.8,330.0 100.8,294.0 122.4,274.0 79.2,270.0 57.6,254.0 46.8,230.0 43.2,206.0 46.8,194.0 43.2,162.0 79.2,146.0 82.8,114.0 86.4,102.0 115.2,90.0 133.2,94.0 136.8,74.0 144.0,62.0 136.8,38.0" transform="translate(205,310) scale(0.48) translate(-205,-322)" fill="#8d806a" stroke="#fff" stroke-opacity=".22" stroke-width="1.2"/><polygon points="126.0,34.0 165.6,40.0 183.6,42.0 219.6,58.0 219.6,74.0 241.2,74.0 262.8,66.0 295.2,58.0 316.8,50.0 338.4,78.0 352.8,110.0 356.4,134.0 363.6,158.0 356.4,194.0 342.0,198.0 291.6,218.0 266.4,222.0 295.2,246.0 277.2,254.0 324.0,282.0 295.2,318.0 295.2,334.0 266.4,326.0 219.6,334.0 194.4,342.0 176.4,330.0 136.8,326.0 100.8,330.0 100.8,294.0 122.4,274.0 79.2,270.0 57.6,254.0 46.8,230.0 43.2,206.0 46.8,194.0 43.2,162.0 79.2,146.0 82.8,114.0 86.4,102.0 115.2,90.0 133.2,94.0 136.8,74.0 144.0,62.0 136.8,38.0" transform="translate(205,307) scale(0.35) translate(-205,-322)" fill="#b0a187" stroke="#fff" stroke-opacity=".22" stroke-width="1.2"/><polygon points="126.0,34.0 165.6,40.0 183.6,42.0 219.6,58.0 219.6,74.0 241.2,74.0 262.8,66.0 295.2,58.0 316.8,50.0 338.4,78.0 352.8,110.0 356.4,134.0 363.6,158.0 356.4,194.0 342.0,198.0 291.6,218.0 266.4,222.0 295.2,246.0 277.2,254.0 324.0,282.0 295.2,318.0 295.2,334.0 266.4,326.0 219.6,334.0 194.4,342.0 176.4,330.0 136.8,326.0 100.8,330.0 100.8,294.0 122.4,274.0 79.2,270.0 57.6,254.0 46.8,230.0 43.2,206.0 46.8,194.0 43.2,162.0 79.2,146.0 82.8,114.0 86.4,102.0 115.2,90.0 133.2,94.0 136.8,74.0 144.0,62.0 136.8,38.0" transform="translate(205,304) scale(0.22) translate(-205,-322)" fill="#d8c9a6" stroke="#fff" stroke-opacity=".22" stroke-width="1.2"/>
+ <polygon points="151,332 185,292 219,332" fill="url(#gRock)"/><polygon points="174,305 185,292 195,303 188,307 182,302" fill="#fff" fill-opacity=".92"/><polygon points="175,336 215,280 255,336" fill="url(#gRock)"/><polygon points="202,298 215,280 226,296 218,301 211,295" fill="#fff" fill-opacity=".92"/><polygon points="206,334 250,270 294,334" fill="url(#gRock)"/><polygon points="236,290 250,270 262,288 254,294 246,287" fill="#fff" fill-opacity=".92"/><polygon points="247,336 285,288 323,336" fill="url(#gRock)"/><polygon points="273,303 285,288 296,301 288,306 281,300" fill="#fff" fill-opacity=".92"/><polygon points="288,338 318,304 348,338" fill="url(#gRock)"/><polygon points="308,315 318,304 326,314 320,317 315,313" fill="#fff" fill-opacity=".92"/><polygon points="122,334 150,306 178,334" fill="url(#gRock)"/><polygon points="141,315 150,306 158,314 152,317 147,313" fill="#fff" fill-opacity=".92"/>
+ <path d="M100.8,330.0 L100.8,302.0 L122.4,274.0 L129.6,254.0 L111.6,234.0 L86.4,214.0 L75.6,194.0 L54.0,166.0" fill="none" stroke="#7fd0ff" stroke-opacity=".5" stroke-width="7" filter="url(#blur3)"/>
+ <path d="M100.8,330.0 L100.8,302.0 L122.4,274.0 L129.6,254.0 L111.6,234.0 L86.4,214.0 L75.6,194.0 L54.0,166.0" fill="none" stroke="url(#gRhine)" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/>
+ <path d="M342.0,198.0 L320.4,194.0 L273.6,158.0 L248.4,150.0 L205.2,102.0 L151.2,82.0" fill="none" stroke="#9fd8f5" stroke-opacity=".7" stroke-width="1.6" stroke-linejoin="round"/>
+ <circle cx="309.6" cy="122.0" r="3.4" fill="#f0b92a" stroke="#fff" stroke-width=".8"/>
+</symbol>
+
+<!-- 3 · Portão de Brandemburgo + Muro -->
+<symbol id="s3" viewBox="0 0 400 400">
+ <ellipse cx="200" cy="378" rx="150" ry="12" fill="url(#shadow)"/>
+ <rect x="62" y="318" width="236" height="20" fill="url(#gStone)"/>
+ <rect x="70" y="304" width="220" height="14" fill="url(#gStone)"/>
+ <rect x="88" y="152" width="22" height="152" fill="url(#gStone)"/><rect x="84" y="146" width="30" height="9" fill="url(#gStone)"/><rect x="84" y="300" width="30" height="6" fill="url(#gStone)"/><rect x="126" y="152" width="22" height="152" fill="url(#gStone)"/><rect x="122" y="146" width="30" height="9" fill="url(#gStone)"/><rect x="122" y="300" width="30" height="6" fill="url(#gStone)"/><rect x="164" y="152" width="22" height="152" fill="url(#gStone)"/><rect x="160" y="146" width="30" height="9" fill="url(#gStone)"/><rect x="160" y="300" width="30" height="6" fill="url(#gStone)"/><rect x="202" y="152" width="22" height="152" fill="url(#gStone)"/><rect x="198" y="146" width="30" height="9" fill="url(#gStone)"/><rect x="198" y="300" width="30" height="6" fill="url(#gStone)"/><rect x="240" y="152" width="22" height="152" fill="url(#gStone)"/><rect x="236" y="146" width="30" height="9" fill="url(#gStone)"/><rect x="236" y="300" width="30" height="6" fill="url(#gStone)"/><rect x="278" y="152" width="22" height="152" fill="url(#gStone)"/><rect x="274" y="146" width="30" height="9" fill="url(#gStone)"/><rect x="274" y="300" width="30" height="6" fill="url(#gStone)"/>
+ <rect x="64" y="118" width="232" height="30" fill="url(#gStone)"/>
+ <rect x="64" y="132" width="232" height="3" fill="#000" opacity=".18"/>
+ <rect x="124" y="92" width="112" height="28" fill="url(#gStone)"/>
+ <g fill="#7c9b86" stroke="#2f4638" stroke-width="1">
+  <rect x="142" y="76" width="76" height="16"/>
+  <path d="M150,76 L158,56 L170,60 L172,76Z"/><path d="M176,76 L182,52 L194,52 L198,76Z"/><path d="M204,76 L210,58 L222,56 L216,76Z"/>
+  <path d="M196,52 L180,30 L200,12 L222,30 L204,52Z" fill="#8fb09a"/>
+  <path d="M198,12 L190,2 L206,2Z" fill="#f0b92a" stroke="none"/>
+ </g>
+ <path d="M236,270 L262,258 L280,264 L300,250 L340,254 L346,360 L236,360Z" fill="url(#gConc)" stroke="#2a2927" stroke-width="1.5"/>
+ <path d="M236,296 L346,272 L346,296 L236,322Z" fill="#d8281c" opacity=".85"/>
+ <path d="M236,322 L346,296 L346,312 L236,338Z" fill="#f0b92a" opacity=".85"/>
+ <path d="M236,270 L262,258 M290,262 L300,330 L312,352 M268,282 L272,320" stroke="#1c1b1a" stroke-width="1.6" fill="none"/>
+ <path d="M286,262 L292,300 L284,330" stroke="#1c1b1a" stroke-width="1.2" fill="none"/>
+</symbol>
+
+<!-- 4 · Tábua com Brezel, Bratwurst e cerveja -->
+<symbol id="s4" viewBox="0 0 400 400">
+ <ellipse cx="200" cy="360" rx="170" ry="16" fill="url(#shadow)"/>
+ <ellipse cx="200" cy="318" rx="172" ry="68" fill="url(#gWoodSide)"/>
+ <ellipse cx="200" cy="300" rx="172" ry="68" fill="url(#gWood)" stroke="#e7b982" stroke-opacity=".35"/>
+ <g fill="none" stroke="#3a210d" stroke-opacity=".25"><path d="M60,296 Q200,270 340,296"/><path d="M80,322 Q200,298 320,322"/><path d="M96,270 Q200,252 304,272"/></g>
+ <!-- cerveja -->
+ <g transform="translate(262,78)">
+  <path d="M0,20 L66,20 L58,206 Q58,214 50,214 L16,214 Q8,214 8,206Z" fill="url(#gBeer)"/>
+  <path d="M0,20 L66,20 L58,206 Q58,214 50,214 L16,214 Q8,214 8,206Z" fill="url(#gGlass)" stroke="#fff" stroke-opacity=".4"/>
+  <g fill="#fff" fill-opacity=".5"><circle cx="24" cy="150" r="1.8"/><circle cx="38" cy="120" r="1.5"/><circle cx="30" cy="80" r="1.8"/><circle cx="44" cy="170" r="1.4"/></g>
+  <g fill="#fffaf0"><circle cx="8" cy="18" r="13"/><circle cx="24" cy="10" r="15"/><circle cx="42" cy="8" r="15"/><circle cx="58" cy="16" r="13"/><rect x="2" y="14" width="64" height="14" rx="6"/></g>
+  <path d="M10,34 L16,200" stroke="#fff" stroke-opacity=".55" stroke-width="4" stroke-linecap="round"/>
+ </g>
+ <!-- bratwurst -->
+ <g transform="translate(168,330) rotate(-10)">
+  <rect x="-10" y="-2" width="150" height="34" rx="17" fill="#2a170a" opacity=".5" transform="translate(4,8)"/>
+  <rect x="-10" y="-2" width="150" height="34" rx="17" fill="url(#gWurst)"/>
+  <g stroke="#3b1a09" stroke-opacity=".55" stroke-width="4" stroke-linecap="round"><path d="M18,4 L32,28"/><path d="M48,2 L62,30"/><path d="M78,2 L92,30"/><path d="M108,4 L120,28"/></g>
+  <path d="M4,6 Q70,-2 128,8" stroke="#fff" stroke-opacity=".35" stroke-width="3" fill="none" stroke-linecap="round"/>
+ </g>
+ <!-- brezel -->
+ <g transform="translate(130,236) scale(1.25)">
+  <path d="M-34,40 C-82,6 -72,-50 -30,-48 C-10,-46 0,-30 0,-18 C0,-30 10,-46 30,-48 C72,-50 82,6 34,40" fill="none" stroke="#5b2c0a" stroke-width="17" stroke-linecap="round"/>
+  <path d="M-34,40 C-20,32 18,-6 40,-34" fill="none" stroke="#5b2c0a" stroke-width="17" stroke-linecap="round"/>
+  <path d="M34,40 C20,32 -18,-6 -40,-34" fill="none" stroke="#5b2c0a" stroke-width="17" stroke-linecap="round"/>
+  <path d="M-34,40 C-82,6 -72,-50 -30,-48 C-10,-46 0,-30 0,-18 C0,-30 10,-46 30,-48 C72,-50 82,6 34,40" fill="none" stroke="url(#gBrez)" stroke-width="13" stroke-linecap="round"/>
+  <path d="M-34,40 C-20,32 18,-6 40,-34" fill="none" stroke="url(#gBrez)" stroke-width="13" stroke-linecap="round"/>
+  <path d="M34,40 C20,32 -18,-6 -40,-34" fill="none" stroke="url(#gBrez)" stroke-width="13" stroke-linecap="round"/>
+  <path d="M-30,-44 C-60,-46 -70,-10 -52,16" fill="none" stroke="#ffe3a8" stroke-opacity=".45" stroke-width="3" stroke-linecap="round"/>
+  <g fill="#fff"><circle cx="-52" cy="-18" r="1.8"/><circle cx="-40" cy="-40" r="1.6"/><circle cx="48" cy="-22" r="1.8"/><circle cx="36" cy="-42" r="1.6"/><circle cx="-6" cy="14" r="1.6"/><circle cx="14" cy="4" r="1.5"/><circle cx="-24" cy="22" r="1.5"/></g>
+ </g>
+</symbol>
+
+<!-- 5 · Neuschwanstein -->
+<symbol id="s5" viewBox="0 0 400 400">
+ <ellipse cx="200" cy="380" rx="150" ry="11" fill="url(#shadow)"/>
+ <path d="M40,372 L96,300 L130,288 L270,288 L312,304 L364,372Z" fill="url(#gHill)"/>
+ <path d="M96,300 L120,330 L110,372 M312,304 L290,336 L300,372 M170,300 L176,340 L160,372" stroke="#000" stroke-opacity=".3" fill="none" stroke-width="2"/>
+ <!-- corpo principal -->
+ <rect x="118" y="226" width="164" height="66" fill="url(#gCastle)"/>
+ <polygon points="112,226 200,196 288,226" fill="url(#gRoof)"/>
+ <!-- torre esquerda -->
+ <rect x="126" y="170" width="34" height="62" fill="url(#gCastle)"/>
+ <polygon points="120,170 143,108 166,170" fill="url(#gRoof)"/>
+ <!-- torre central -->
+ <rect x="184" y="112" width="44" height="120" fill="url(#gCastle)"/>
+ <rect x="180" y="146" width="52" height="8" fill="#cfcabd"/>
+ <polygon points="178,112 206,34 234,112" fill="url(#gRoof)"/>
+ <rect x="205" y="14" width="2.5" height="24" fill="#f0b92a"/><circle cx="206" cy="14" r="3.4" fill="#f0b92a"/>
+ <!-- torre direita -->
+ <rect x="244" y="154" width="30" height="78" fill="url(#gCastle)"/>
+ <polygon points="238,154 259,100 280,154" fill="url(#gRoof)"/>
+ <!-- torrinhas -->
+ <rect x="170" y="190" width="14" height="40" fill="url(#gCastle)"/><polygon points="166,190 177,162 188,190" fill="url(#gRoof)"/>
+ <rect x="232" y="180" width="12" height="40" fill="url(#gCastle)"/><polygon points="229,180 238,156 247,180" fill="url(#gRoof)"/>
+ <!-- janelas -->
+ <g fill="#2a3340">
+  <path d="M128,204 v-9 a4,4 0 0 1 8,0 v9z"/><path d="M138,204 v-9 a4,4 0 0 1 8,0 v9z"/><path d="M148,204 v-9 a4,4 0 0 1 8,0 v9z"/>
+  <path d="M190,144 v-9 a4,4 0 0 1 8,0 v9z"/><path d="M190,184 v-9 a4,4 0 0 1 8,0 v9z"/><path d="M200,144 v-9 a4,4 0 0 1 8,0 v9z"/><path d="M200,184 v-9 a4,4 0 0 1 8,0 v9z"/><path d="M210,144 v-9 a4,4 0 0 1 8,0 v9z"/><path d="M210,184 v-9 a4,4 0 0 1 8,0 v9z"/><path d="M220,144 v-9 a4,4 0 0 1 8,0 v9z"/><path d="M220,184 v-9 a4,4 0 0 1 8,0 v9z"/>
+  <path d="M130,260 v-10 a4.5,4.5 0 0 1 9,0 v10z"/><path d="M148,260 v-10 a4.5,4.5 0 0 1 9,0 v10z"/><path d="M166,260 v-10 a4.5,4.5 0 0 1 9,0 v10z"/><path d="M184,260 v-10 a4.5,4.5 0 0 1 9,0 v10z"/><path d="M202,260 v-10 a4.5,4.5 0 0 1 9,0 v10z"/><path d="M220,260 v-10 a4.5,4.5 0 0 1 9,0 v10z"/><path d="M238,260 v-10 a4.5,4.5 0 0 1 9,0 v10z"/><path d="M256,260 v-10 a4.5,4.5 0 0 1 9,0 v10z"/>
+  <path d="M250,190 v-9 a4,4 0 0 1 8,0 v9z"/><path d="M262,190 v-9 a4,4 0 0 1 8,0 v9z"/>
+ </g>
+ <g fill="#f4c76a" opacity=".9"><path d="M200,260 v-10 a4.5,4.5 0 0 1 9,0 v10z"/></g>
+ <!-- névoa -->
+ <g fill="#cfd8e0" filter="url(#blur6)">
+  <ellipse cx="90" cy="318" rx="86" ry="14" opacity=".45"/>
+  <ellipse cx="310" cy="330" rx="92" ry="13" opacity=".4"/>
+  <ellipse cx="200" cy="352" rx="150" ry="14" opacity=".5"/>
+  <ellipse cx="150" cy="212" rx="60" ry="8" opacity=".18"/>
+ </g>
+</symbol>
+
+<!-- 6 · Engrenagem + pá eólica + tipos móveis -->
+<symbol id="s6" viewBox="0 0 400 400">
+ <ellipse cx="200" cy="380" rx="150" ry="11" fill="url(#shadow)"/>
+ <path d="M258,372 C262,256 296,150 350,36 C344,150 336,262 300,372Z" fill="url(#gSteel)" stroke="#fff" stroke-opacity=".18"/>
+ <path d="M268,360 C276,260 304,160 346,60" fill="none" stroke="#fff" stroke-opacity=".55" stroke-width="3" stroke-linecap="round"/>
+ <polygon points="230.0,215.0 247.9,219.4 246.4,232.5 228.0,232.8 222.1,249.7 236.3,261.4 229.3,272.6 212.5,264.9 199.9,277.5 207.6,294.3 196.4,301.3 184.7,287.1 167.8,293.0 167.5,311.4 154.4,312.9 150.0,295.0 132.2,293.0 123.9,309.5 111.5,305.1 115.3,287.1 100.1,277.5 85.5,288.8 76.2,279.5 87.5,264.9 77.9,249.7 59.9,253.5 55.5,241.1 72.0,232.8 70.0,215.0 52.1,210.6 53.6,197.5 72.0,197.2 77.9,180.3 63.7,168.6 70.7,157.4 87.5,165.1 100.1,152.5 92.4,135.7 103.6,128.7 115.3,142.9 132.2,137.0 132.5,118.6 145.6,117.1 150.0,135.0 167.8,137.0 176.1,120.5 188.5,124.9 184.7,142.9 199.9,152.5 214.5,141.2 223.8,150.5 212.5,165.1 222.1,180.3 240.1,176.5 244.5,188.9 228.0,197.2" fill="#0b0b0b" transform="translate(5,6)" opacity=".55"/>
+ <polygon points="230.0,215.0 247.9,219.4 246.4,232.5 228.0,232.8 222.1,249.7 236.3,261.4 229.3,272.6 212.5,264.9 199.9,277.5 207.6,294.3 196.4,301.3 184.7,287.1 167.8,293.0 167.5,311.4 154.4,312.9 150.0,295.0 132.2,293.0 123.9,309.5 111.5,305.1 115.3,287.1 100.1,277.5 85.5,288.8 76.2,279.5 87.5,264.9 77.9,249.7 59.9,253.5 55.5,241.1 72.0,232.8 70.0,215.0 52.1,210.6 53.6,197.5 72.0,197.2 77.9,180.3 63.7,168.6 70.7,157.4 87.5,165.1 100.1,152.5 92.4,135.7 103.6,128.7 115.3,142.9 132.2,137.0 132.5,118.6 145.6,117.1 150.0,135.0 167.8,137.0 176.1,120.5 188.5,124.9 184.7,142.9 199.9,152.5 214.5,141.2 223.8,150.5 212.5,165.1 222.1,180.3 240.1,176.5 244.5,188.9 228.0,197.2" fill="url(#gSteel)" stroke="#fff" stroke-opacity=".25"/>
+ <circle cx="150" cy="215" r="64" fill="#1b1e21"/>
+ <circle cx="150" cy="215" r="64" fill="none" stroke="url(#gSteelV)" stroke-width="7"/>
+ <rect x="144" y="153" width="12" height="62" fill="url(#gSteel)" transform="rotate(0 150 215)"/><rect x="144" y="153" width="12" height="62" fill="url(#gSteel)" transform="rotate(60 150 215)"/><rect x="144" y="153" width="12" height="62" fill="url(#gSteel)" transform="rotate(120 150 215)"/><rect x="144" y="153" width="12" height="62" fill="url(#gSteel)" transform="rotate(180 150 215)"/><rect x="144" y="153" width="12" height="62" fill="url(#gSteel)" transform="rotate(240 150 215)"/><rect x="144" y="153" width="12" height="62" fill="url(#gSteel)" transform="rotate(300 150 215)"/>
+ <circle cx="150" cy="215" r="26" fill="url(#gGold)" stroke="#5a3f0c" stroke-width="2"/>
+ <circle cx="150" cy="215" r="10" fill="#161616"/>
+ <!-- tipos móveis -->
+ <g font-family="Georgia, 'Times New Roman', serif" font-weight="700" font-size="30" text-anchor="middle">
+  <g transform="translate(206,330) rotate(-8)"><rect width="36" height="50" rx="3" fill="url(#gSteel)" stroke="#2b3035"/><text x="18" y="36" fill="#15181b">G</text></g>
+  <g transform="translate(246,338) rotate(4)"><rect width="36" height="50" rx="3" fill="url(#gSteel)" stroke="#2b3035"/><text x="18" y="36" fill="#15181b">B</text></g>
+  <g transform="translate(128,340) rotate(-3)"><rect width="36" height="50" rx="3" fill="url(#gGold)" stroke="#5a3f0c"/><text x="18" y="36" fill="#3c2a05">Ä</text></g>
+ </g>
+</symbol>
+</svg>
+
+
+<header class="hud">
+  <div class="brand"><span class="flag"><i></i><i></i><i></i></span><b>Deutschland</b><span class="hide-m">· 51°N 10°E</span></div>
+  <div><b id="counter">01</b> / 07</div>
+</header>
+
+<div id="line" aria-hidden="true"><div class="fill" id="fill"></div></div>
+<div id="stage" aria-hidden="false">
+<div class="fig" data-fig="1"><svg role="img" aria-label="Panorama Geral"><use href="#s1"/></svg></div>
+<div class="fig" data-fig="2"><svg role="img" aria-label="Localização e Geografia"><use href="#s2"/></svg></div>
+<div class="fig" data-fig="3"><svg role="img" aria-label="História Completa"><use href="#s3"/></svg></div>
+<div class="fig" data-fig="4"><svg role="img" aria-label="Culinária e Pratos Típicos"><use href="#s4"/></svg></div>
+<div class="fig" data-fig="5"><svg role="img" aria-label="Cultura, Castelos e Curiosidades"><use href="#s5"/></svg></div>
+<div class="fig" data-fig="6"><svg role="img" aria-label="Pensadores, Ciência e Engenharia"><use href="#s6"/></svg></div>
+</div>
+
+<main>
+
+<section class="act" id="ato1" data-act="1" aria-label="Panorama Geral">
+  <div class="sticky">
+    <div class="copy left">
+      <p class="kicker"><span>ATO 01</span> / 07 — PANORAMA GERAL</p>
+      <h1>PANORAMA <em>geral</em></h1>
+      <p class="lead">A República Federal da Alemanha (<i>Bundesrepublik Deutschland</i>) é uma democracia parlamentarista e federal. Sua capital é Berlim, o idioma oficial é o alemão e a moeda é o Euro. Com a maior população da União Europeia depois de ser reunificada em 1990, é também a maior economia da Europa e uma das mais industrializadas e exportadoras do planeta.</p>
+      <ul class="data"><li><b>CAPITAL:</b> BERLIM</li><li><b>POPULAÇÃO:</b> ~84,5 MI</li><li><b>MOEDA:</b> EURO (€)</li><li><b>IDIOMA:</b> ALEMÃO</li></ul>
+    </div>
+  </div>
+</section>
+<section class="act" id="ato2" data-act="2" aria-label="Localização e Geografia">
+  <div class="sticky">
+    <div class="copy right">
+      <p class="kicker"><span>ATO 02</span> / 07 — LOCALIZAÇÃO E GEOGRAFIA</p>
+      <h2>NO CENTRO <em>da Europa</em></h2>
+      <p class="lead">Situada no coração da Europa Central, a Alemanha faz fronteira com 9 países: Dinamarca, Polônia, República Tcheca, Áustria, Suíça, França, Luxemburgo, Bélgica e Países Baixos. O relevo é variado: vai das planícies do Mar do Norte e do Báltico até os Alpes Bávaros, ao sul, e é cortado por rios estratégicos como o Reno, o Elba e o Danúbio.</p>
+      <ul class="data"><li><b>COORD.:</b> 51°N 10°E</li><li><b>ÁREA:</b> 357.588 KM²</li><li><b>FRONTEIRAS:</b> 9</li><li><b>ESTADOS:</b> 16 (LÄNDER)</li></ul>
+    </div>
+  </div>
+</section>
+<section class="act" id="ato3" data-act="3" aria-label="História Completa">
+  <div class="sticky">
+    <div class="copy left">
+      <p class="kicker"><span>ATO 03</span> / 07 — HISTÓRIA COMPLETA</p>
+      <h2>HISTÓRIA <em>completa</em></h2>
+      <p class="lead">Das tribos germânicas que resistiram ao Império Romano ao Sacro Império Romano-Germânico; da Reforma Protestante de Martinho Lutero (1517) à unificação liderada por Otto von Bismarck (1871). O século XX foi marcado pelas duas Guerras Mundiais e pela divisão da Guerra Fria, simbolizada pelo Muro de Berlim (1961–1989), até a histórica Reunificação, em 1990.</p>
+      <ul class="data"><li><b>1517:</b> REFORMA</li><li><b>1871:</b> UNIFICAÇÃO</li><li><b>1989:</b> QUEDA DO MURO</li><li><b>1990:</b> REUNIFICAÇÃO</li></ul>
+    </div>
+  </div>
+</section>
+<section class="act" id="ato4" data-act="4" aria-label="Culinária e Pratos Típicos">
+  <div class="sticky">
+    <div class="copy right">
+      <p class="kicker"><span>ATO 04</span> / 07 — CULINÁRIA E PRATOS TÍPICOS</p>
+      <h2>SABORES <em>da mesa alemã</em></h2>
+      <p class="lead">Uma gastronomia farta e regional. Famosa pela cultura de panificação, com mais de 3.000 tipos de pães (<i>Brot</i>) e o icônico Pretzel (<i>Brezel</i>). Entre os pratos tradicionais estão Currywurst, Schnitzel, Bratwurst, Sauerkraut (chucrute) e Spätzle. Na confeitaria, o Bolo Floresta Negra (<i>Schwarzwälder Kirschtorte</i>) e o Apfelstrudel; e a tradição cervejeira é regida pela Lei da Pureza (<i>Reinheitsgebot</i>) de 1516.</p>
+      <ul class="data"><li><b>PÃES:</b> +3.000 TIPOS</li><li><b>CERVEJARIAS:</b> +1.500</li><li><b>LEI DA PUREZA:</b> 1516</li></ul>
+    </div>
+  </div>
+</section>
+<section class="act" id="ato5" data-act="5" aria-label="Cultura, Castelos e Curiosidades">
+  <div class="sticky">
+    <div class="copy left">
+      <p class="kicker"><span>ATO 05</span> / 07 — CULTURA, CASTELOS E CURIOSIDADES</p>
+      <h2>CASTELOS <em>& curiosidades</em></h2>
+      <p class="lead">O país abriga mais de 20.000 castelos e palácios, como o fabuloso Neuschwanstein. Entre as curiosidades do cotidiano destacam-se o <i>Ruhetag</i> (domingo de descanso silencioso, quando as lojas fecham e barulhos domésticos são restritos por lei), a eficiência do sistema de reciclagem de garrafas (<i>Pfand</i>), a Oktoberfest de Munique e os tradicionais Mercados de Natal.</p>
+      <ul class="data"><li><b>CASTELOS:</b> +20.000</li><li><b>UNESCO:</b> 52 PATRIMÔNIOS</li><li><b>RECICLAGEM:</b> SISTEMA PFAND</li></ul>
+    </div>
+  </div>
+</section>
+<section class="act" id="ato6" data-act="6" aria-label="Pensadores, Ciência e Engenharia">
+  <div class="sticky">
+    <div class="copy right">
+      <p class="kicker"><span>ATO 06</span> / 07 — PENSADORES, CIÊNCIA E ENGENHARIA</p>
+      <h2>MENTES <em>e máquinas</em></h2>
+      <p class="lead">Conhecida como o &ldquo;País dos Poetas e Pensadores&rdquo; (<i>Das Land der Dichter und Denker</i>), é berço de filósofos como Kant, Nietzsche e Marx; do escritor Goethe; e de compositores como Beethoven e Bach. Na ciência e na tecnologia brilharam Albert Einstein e invenções que mudaram o mundo: a prensa de Gutenberg, o automóvel de Karl Benz, o raio-X e o formato MP3.</p>
+      <ul class="data"><li><b>NOBEL:</b> +110</li><li><b>1450:</b> IMPRENSA</li><li><b>1886:</b> AUTOMÓVEL</li><li><b>ENERGIA:</b> TRANSIÇÃO ENERGÉTICA</li></ul>
+    </div>
+  </div>
+</section>
+
+<section id="sintese" aria-label="Síntese e cards de revisão">
+  <div class="sint-head">
+    <p class="kicker"><span>ATO 07</span> / 07 — SÍNTESE E CARDS DE REVISÃO</p>
+    <h2>SÍNTESE <em>& revisão</em></h2>
+    <p class="lead">Seis frames, uma única jornada. Toque em qualquer card para rever os tópicos do trabalho e o prompt exato usado para gerar a imagem daquela etapa.</p>
+  </div>
+  <div class="grid">
+
+<article class="card" data-n="1">
+  <button class="card-btn" aria-expanded="false" aria-controls="card-d1">
+    <span class="thumb"><svg aria-hidden="true"><use href="#s1"/></svg></span>
+    <span class="card-meta"><span class="mono">ATO 01</span><strong>Panorama Geral</strong><span class="plus" aria-hidden="true">+</span></span>
+  </button>
+  <div class="card-d" id="card-d1"><div class="in">
+    <p>Bundesrepublik Deutschland: república federal parlamentarista, capital Berlim, maior economia europeia.</p>
+    <ul class="data small"><li><b>CAPITAL:</b> BERLIM</li><li><b>POPULAÇÃO:</b> ~84,5 MI</li><li><b>MOEDA:</b> EURO (€)</li><li><b>IDIOMA:</b> ALEMÃO</li></ul>
+    <p class="mono prompt-l">PROMPT DA IMAGEM</p>
+    <code>A minimalist 3D sculptural emblem of the German federal eagle and subtle black-red-gold ribbon floating in space, centered, 85mm lens, soft side light, isolated on solid dark matte background #0d0d0d, ultra detailed, studio photography</code>
+  </div></div>
+</article>
+<article class="card" data-n="2">
+  <button class="card-btn" aria-expanded="false" aria-controls="card-d2">
+    <span class="thumb"><svg aria-hidden="true"><use href="#s2"/></svg></span>
+    <span class="card-meta"><span class="mono">ATO 02</span><strong>Localização e Geografia</strong><span class="plus" aria-hidden="true">+</span></span>
+  </button>
+  <div class="card-d" id="card-d2"><div class="in">
+    <p>Europa Central, 9 fronteiras, 16 estados; do Mar do Norte aos Alpes, com Reno, Elba e Danúbio.</p>
+    <ul class="data small"><li><b>COORD.:</b> 51°N 10°E</li><li><b>ÁREA:</b> 357.588 KM²</li><li><b>FRONTEIRAS:</b> 9</li><li><b>ESTADOS:</b> 16 (LÄNDER)</li></ul>
+    <p class="mono prompt-l">PROMPT DA IMAGEM</p>
+    <code>A finely detailed 3D topographic relief map of Germany showing the Alps in the south and the Rhine river, centered, 85mm lens, soft side light, isolated on solid dark matte background #0d0d0d, ultra detailed, studio photography</code>
+  </div></div>
+</article>
+<article class="card" data-n="3">
+  <button class="card-btn" aria-expanded="false" aria-controls="card-d3">
+    <span class="thumb"><svg aria-hidden="true"><use href="#s3"/></svg></span>
+    <span class="card-meta"><span class="mono">ATO 03</span><strong>História Completa</strong><span class="plus" aria-hidden="true">+</span></span>
+  </button>
+  <div class="card-d" id="card-d3"><div class="in">
+    <p>Tribos germânicas, Sacro Império, Reforma (1517), unificação (1871), Muro (1961–89), reunificação (1990).</p>
+    <ul class="data small"><li><b>1517:</b> REFORMA</li><li><b>1871:</b> UNIFICAÇÃO</li><li><b>1989:</b> QUEDA DO MURO</li><li><b>1990:</b> REUNIFICAÇÃO</li></ul>
+    <p class="mono prompt-l">PROMPT DA IMAGEM</p>
+    <code>A symbolic architectural artifact merging a stone piece of the Berlin Wall with the classical columns of the Brandenburg Gate, centered, 85mm lens, soft side light, isolated on solid dark matte background #0d0d0d, ultra detailed, studio photography</code>
+  </div></div>
+</article>
+<article class="card" data-n="4">
+  <button class="card-btn" aria-expanded="false" aria-controls="card-d4">
+    <span class="thumb"><svg aria-hidden="true"><use href="#s4"/></svg></span>
+    <span class="card-meta"><span class="mono">ATO 04</span><strong>Culinária e Pratos Típicos</strong><span class="plus" aria-hidden="true">+</span></span>
+  </button>
+  <div class="card-d" id="card-d4"><div class="in">
+    <p>+3.000 pães, Brezel, Currywurst, Schnitzel, Spätzle, Floresta Negra e a Lei da Pureza de 1516.</p>
+    <ul class="data small"><li><b>PÃES:</b> +3.000 TIPOS</li><li><b>CERVEJARIAS:</b> +1.500</li><li><b>LEI DA PUREZA:</b> 1516</li></ul>
+    <p class="mono prompt-l">PROMPT DA IMAGEM</p>
+    <code>An artisanal wooden board featuring a golden baked German pretzel, a traditional bratwurst, and a glass of wheat beer, centered, 85mm lens, soft side light, isolated on solid dark matte background #0d0d0d, ultra detailed, studio photography</code>
+  </div></div>
+</article>
+<article class="card" data-n="5">
+  <button class="card-btn" aria-expanded="false" aria-controls="card-d5">
+    <span class="thumb"><svg aria-hidden="true"><use href="#s5"/></svg></span>
+    <span class="card-meta"><span class="mono">ATO 05</span><strong>Cultura, Castelos e Curiosidades</strong><span class="plus" aria-hidden="true">+</span></span>
+  </button>
+  <div class="card-d" id="card-d5"><div class="in">
+    <p>+20.000 castelos, Ruhetag, sistema Pfand, Oktoberfest e Mercados de Natal.</p>
+    <ul class="data small"><li><b>CASTELOS:</b> +20.000</li><li><b>UNESCO:</b> 52 PATRIMÔNIOS</li><li><b>RECICLAGEM:</b> SISTEMA PFAND</li></ul>
+    <p class="mono prompt-l">PROMPT DA IMAGEM</p>
+    <code>A detailed miniature architectural model of Neuschwanstein Castle surrounded by subtle mist, centered, 85mm lens, soft side light, isolated on solid dark matte background #0d0d0d, ultra detailed, studio photography</code>
+  </div></div>
+</article>
+<article class="card" data-n="6">
+  <button class="card-btn" aria-expanded="false" aria-controls="card-d6">
+    <span class="thumb"><svg aria-hidden="true"><use href="#s6"/></svg></span>
+    <span class="card-meta"><span class="mono">ATO 06</span><strong>Pensadores, Ciência e Engenharia</strong><span class="plus" aria-hidden="true">+</span></span>
+  </button>
+  <div class="card-d" id="card-d6"><div class="in">
+    <p>Kant, Goethe, Beethoven, Einstein; Gutenberg, Benz, raio-X, MP3 e a transição energética.</p>
+    <ul class="data small"><li><b>NOBEL:</b> +110</li><li><b>1450:</b> IMPRENSA</li><li><b>1886:</b> AUTOMÓVEL</li><li><b>ENERGIA:</b> TRANSIÇÃO ENERGÉTICA</li></ul>
+    <p class="mono prompt-l">PROMPT DA IMAGEM</p>
+    <code>A precision-engineered metallic mechanical gear intertwined with a sleek modern wind turbine blade and antique printing press type, centered, 85mm lens, soft side light, isolated on solid dark matte background #0d0d0d, ultra detailed, studio photography</code>
+  </div></div>
+</article>
+  </div>
+  <div class="foot"><span>DEUTSCHLAND · 7 ATOS · 6 FRAMES</span><a href="#ato1">↑ VOLTAR AO INÍCIO</a></div>
+</section>
+</main>
+
+<script>
+(function(){
+  const acts=[...document.querySelectorAll('.act')];
+  const figs=[...document.querySelectorAll('.fig')];
+  const copies=acts.map(a=>a.querySelector('.copy'));
+  const fill=document.getElementById('fill');
+  const counter=document.getElementById('counter');
+  const sint=document.getElementById('sintese');
+  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const clamp=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+  const smooth=x=>{x=clamp(x);return x*x*(3-2*x)};
+  let ticking=false;
+
+  function update(){
+    ticking=false;
+    const vh=innerHeight;
+    const xf=innerWidth<768?0.10:0.20;           // janela de crossfade (fim de cada ato)
+    const ps=acts.map(a=>{const r=a.getBoundingClientRect();return clamp(-r.top/(r.height-vh))});
+
+    let best=0,bestO=-1;
+    figs.forEach((f,i)=>{
+      const inn=i===0?1:smooth((ps[i-1]-(1-xf))/xf);
+      const out=1-smooth((ps[i]-(1-xf))/xf);
+      const o=inn*out;
+      f.style.opacity=o.toFixed(3);
+      f.style.visibility=o>0.001?'visible':'hidden';
+      if(!reduce){
+        const p=ps[i];
+        f.firstElementChild.style.transform=`rotateY(${((p-.5)*18).toFixed(2)}deg) rotateX(${((.5-p)*4).toFixed(2)}deg) scale(${(0.96+p*0.07).toFixed(3)})`;
+      }
+      if(o>bestO){bestO=o;best=i}
+      // texto: surge no início, some no fim
+      const p=ps[i];
+      const ci=(i===0?1:smooth(p/0.12))*(1-smooth((p-0.9)/0.1));
+      copies[i].style.opacity=ci.toFixed(3);
+      copies[i].style.transform=`translateY(${((1-ci)*14).toFixed(1)}px)`;
+    });
+
+    // linha vertical contínua
+    const h=document.documentElement.scrollHeight-vh;
+    fill.style.transform=`scaleY(${h>0?clamp(scrollY/h).toFixed(4):0})`;
+
+    // contador de atos
+    const inSint=sint.getBoundingClientRect().top<vh*0.55;
+    counter.textContent=String(inSint?7:best+1).padStart(2,'0');
+  }
+  function req(){if(!ticking){ticking=true;requestAnimationFrame(update)}}
+  addEventListener('scroll',req,{passive:true});
+  addEventListener('resize',req);
+  update();
+
+  // cards interativos
+  document.querySelectorAll('.card').forEach(c=>{
+    const b=c.querySelector('.card-btn');
+    b.addEventListener('click',()=>{
+      const open=c.classList.toggle('open');
+      b.setAttribute('aria-expanded',open);
+    });
+  });
+})();
+</script>
+</body>
+</html>
