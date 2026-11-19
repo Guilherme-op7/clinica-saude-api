@@ -1,8 +1,8 @@
 PESSOA 1  (slides 1 a 6, cerca de 10.5 min)
 
-[Slide 1: Capa: Alemanha] Boa tarde a todos. Hoje vamos fazer uma viagem pela Alemanha, um país no coração da Europa que é, ao mesmo tempo, berço de poetas, cientistas e inventores e palco de um dos capítulos mais sombrios da história humana.
+[Slide 1: Capa: Alemanha] Hoje vamos fazer uma viagem pela Alemanha, um país no coração da Europa que é, ao mesmo tempo, berço de poetas, cientistas e inventores e palco de um dos capítulos mais sombrios da história humana.
 
-Vamos começar pelo panorama e pela geografia, passar pelas cidades e pela história, dedicar um momento importante ao nazismo e ao Holocausto, e depois conhecer a culinária, os castelos, a música, a ciência, a economia e a natureza. Somos três apresentadores e vamos dividir a apresentação em três partes.
+Vamos começar pelo panorama e pela geografia, passar pelas cidades e pela história, dedicar um momento importante ao nazismo e ao Holocausto, e depois conhecer a culinária, os castelos, a música, a ciência, a economia e a natureza.
 
 [Slide 2: Panorama geral] A Alemanha, em alemão Bundesrepublik Deutschland, é uma república federal e parlamentarista. A capital é Berlim, o idioma oficial é o alemão e a moeda é o euro.
 
@@ -28,7 +28,7 @@ Por muito tempo, a Alemanha foi um mosaico de reinos e principados. Só em 1871,
 
 O século XX trouxe duas guerras mundiais e, depois da segunda, a divisão do país em dois: a Alemanha Ocidental e a Oriental. Berlim foi cortada por um muro entre 1961 e 1989. Em 3 de outubro de 1990, o país voltou a ser um só.
 
-Entre as duas guerras, porém, houve um período que precisa ser contado com cuidado e respeito: o nazismo e o Holocausto. É o que vamos ver agora.
+Entre as duas guerras, porém, houve um período que precisa ser contado com cuidado e respeito: o nazismo e o Holocausto.
 
 [Slide 6: Nazismo e os judeus I: como começou (1933–1939)] Primeiro, uma coisa essencial: o Holocausto não começou nas câmaras de gás. Começou com ideias, com preconceito, com palavras. Por séculos, os judeus foram alvo de discriminação na Europa. No século XIX, esse preconceito ganhou uma roupagem pseudocientífica, a falsa ideia de raças superiores e inferiores.
 
@@ -38,7 +38,7 @@ Em 30 de janeiro de 1933, Hitler foi nomeado chanceler e, em poucos meses, a dem
 
 Em abril de 1933, veio o boicote às lojas judaicas. Em 1935, as Leis de Nuremberg retiraram a cidadania dos judeus e proibiram casamentos entre judeus e não judeus: a discriminação virou lei. Em 9 e 10 de novembro de 1938, a Noite dos Cristais: sinagogas queimadas, lojas destruídas, dezenas de pessoas assassinadas e cerca de 30 mil homens presos em campos de concentração.
 
-O horror não aconteceu de uma só vez. Cada passo foi aceito porque o anterior já tinha sido aceito. Agora o próximo apresentador vai falar do que aconteceu quando a guerra começou.
+O horror não aconteceu de uma só vez. Cada passo foi aceito porque o anterior já tinha sido aceito.
 
 
 ============================================================
@@ -53,7 +53,7 @@ Em janeiro de 1942, na Conferência de Wannsee, perto de Berlim, altos funcioná
 
 No total, cerca de 6 milhões de judeus foram assassinados, dois terços dos judeus da Europa, incluindo cerca de 1,5 milhão de crianças. Cada número tinha nome, família e sonhos.
 
-Os nazistas também perseguiram e mataram ciganos, pessoas com deficiência, prisioneiros políticos, testemunhas de Jeová, homossexuais e milhões de prisioneiros de guerra soviéticos. Mas apenas os judeus foram alvo de um plano de extermínio total. E o mais perturbador é que isso foi feito com burocracia, listas, trens e funcionários comuns. Mas, mesmo nesse cenário, houve quem resistisse, quem salvasse vidas e uma memória que a Alemanha constrói até hoje. É o que veremos a seguir.
+Os nazistas também perseguiram e mataram ciganos, pessoas com deficiência, prisioneiros políticos, testemunhas de Jeová, homossexuais e milhões de prisioneiros de guerra soviéticos. Mas apenas os judeus foram alvo de um plano de extermínio total. E o mais perturbador é que isso foi feito com burocracia, listas, trens e funcionários comuns.
 
 [Slide 8: Nazismo e os judeus III: resistência, justiça e memória] Mesmo no meio do horror, houve resistência. Em abril de 1943, jovens judeus do Gueto de Varsóvia se levantaram contra os nazistas. Sabiam que não podiam vencer, mas resistiram para morrer com dignidade.
 
@@ -63,9 +63,9 @@ Em 27 de janeiro de 1945, o Exército Soviético libertou Auschwitz, data que ho
 
 A Alemanha de hoje fez um longo trabalho de memória. Há o Memorial aos Judeus Assassinados da Europa, em Berlim, e os Stolpersteine, pequenas placas de latão nas calçadas com o nome de cada vítima, na porta da casa onde moravam. Negar o Holocausto é crime no país.
 
-O sobrevivente italiano Primo Levi escreveu: “Aconteceu, portanto pode acontecer de novo.” Lembrar é um compromisso com o presente: rejeitar o discurso de ódio, defender quem é perseguido e não ficar em silêncio. Agora, vamos seguir para outros aspectos da cultura alemã.
+O sobrevivente italiano Primo Levi escreveu: “Aconteceu, portanto pode acontecer de novo.” Lembrar é um compromisso com o presente: rejeitar o discurso de ódio, defender quem é perseguido e não ficar em silêncio.
 
-[Slide 9: Culinária e pratos típicos] Depois de um tema tão pesado, vamos à mesa. A cozinha alemã é farta e regional. O país tem mais de 3.000 tipos de pão e o icônico Brezel, o pretzel.
+[Slide 9: Culinária e pratos típicos] A cozinha alemã é farta e regional. O país tem mais de 3.000 tipos de pão e o icônico Brezel, o pretzel.
 
 Entre os pratos tradicionais estão a Currywurst, o Schnitzel, a Bratwurst, o chucrute e o Spätzle. Na confeitaria, o Bolo Floresta Negra e o Apfelstrudel.
 
@@ -75,16 +75,12 @@ E há a tradição cervejeira, regida desde 1516 pela Lei da Pureza, a Reinheits
 
 No dia a dia há costumes curiosos: o Ruhetag, o domingo de descanso, em que as lojas fecham e barulhos domésticos são restritos; o sistema Pfand, em que se devolve a garrafa e se recebe o depósito de volta; a Oktoberfest, em Munique; e os Mercados de Natal, uma tradição de séculos.
 
-Agora passo a palavra ao próximo apresentador, que vai falar de música, ciência, economia e natureza.
-
 
 ============================================================
 
 PESSOA 3  (slides 11 a 17, cerca de 11 min)
 
-[Slide 11: Música e esportes] Obrigado. Vamos agora à música e ao esporte.
-
-Bach, Beethoven, Brahms e Wagner fazem da Alemanha uma das grandes pátrias da música clássica. Beethoven nasceu em Bonn, em 1770, e compôs a Nona Sinfonia já completamente surdo.
+[Slide 11: Música e esportes] Bach, Beethoven, Brahms e Wagner fazem da Alemanha uma das grandes pátrias da música clássica. Beethoven nasceu em Bonn, em 1770, e compôs a Nona Sinfonia já completamente surdo.
 
 No esporte, o futebol é paixão nacional: a seleção é tetracampeã mundial, com títulos em 1954, 1974, 1990 e 2014.
 
